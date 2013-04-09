@@ -133,6 +133,10 @@
 		9CF7B94D17145915007C2D69 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CF7B94C17145915007C2D69 /* AppDelegate.m */; };
 		9CF7B95017145915007C2D69 /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CF7B94F17145915007C2D69 /* HelloWorldLayer.m */; };
 		9CF7B95317145915007C2D69 /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CF7B95217145915007C2D69 /* IntroLayer.m */; };
+		9CF7B95E17145942007C2D69 /* BZFoursquare.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CF7B95B17145942007C2D69 /* BZFoursquare.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9CF7B95F17145942007C2D69 /* BZFoursquareRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CF7B95D17145942007C2D69 /* BZFoursquareRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9CF7B961171459B8007C2D69 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CF7B960171459B8007C2D69 /* MobileCoreServices.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		9CF7B96417145B3C007C2D69 /* HelloFoursquare.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CF7B96317145B3C007C2D69 /* HelloFoursquare.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -398,6 +402,13 @@
 		9CF7B94F17145915007C2D69 /* HelloWorldLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloWorldLayer.m; sourceTree = "<group>"; };
 		9CF7B95117145915007C2D69 /* IntroLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntroLayer.h; sourceTree = "<group>"; };
 		9CF7B95217145915007C2D69 /* IntroLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntroLayer.m; sourceTree = "<group>"; };
+		9CF7B95A17145942007C2D69 /* BZFoursquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZFoursquare.h; sourceTree = "<group>"; };
+		9CF7B95B17145942007C2D69 /* BZFoursquare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZFoursquare.m; sourceTree = "<group>"; };
+		9CF7B95C17145942007C2D69 /* BZFoursquareRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZFoursquareRequest.h; sourceTree = "<group>"; };
+		9CF7B95D17145942007C2D69 /* BZFoursquareRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZFoursquareRequest.m; sourceTree = "<group>"; };
+		9CF7B960171459B8007C2D69 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		9CF7B96217145B3C007C2D69 /* HelloFoursquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelloFoursquare.h; sourceTree = "<group>"; };
+		9CF7B96317145B3C007C2D69 /* HelloFoursquare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelloFoursquare.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -405,6 +416,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CF7B961171459B8007C2D69 /* MobileCoreServices.framework in Frameworks */,
 				9CF7B7C217145912007C2D69 /* QuartzCore.framework in Frameworks */,
 				9CF7B7C417145912007C2D69 /* OpenGLES.framework in Frameworks */,
 				9CF7B7C617145912007C2D69 /* OpenAL.framework in Frameworks */,
@@ -440,6 +452,7 @@
 		9CF7B7C017145912007C2D69 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9CF7B960171459B8007C2D69 /* MobileCoreServices.framework */,
 				9CF7B7C117145912007C2D69 /* QuartzCore.framework */,
 				9CF7B7C317145912007C2D69 /* OpenGLES.framework */,
 				9CF7B7C517145912007C2D69 /* OpenAL.framework */,
@@ -456,6 +469,7 @@
 		9CF7B7D317145912007C2D69 /* dibs */ = {
 			isa = PBXGroup;
 			children = (
+				9CF7B95917145942007C2D69 /* BZFoursquare */,
 				9CF7B94B17145915007C2D69 /* AppDelegate.h */,
 				9CF7B94C17145915007C2D69 /* AppDelegate.m */,
 				9CF7B94E17145915007C2D69 /* HelloWorldLayer.h */,
@@ -465,6 +479,8 @@
 				9CF7B7D417145912007C2D69 /* Resources */,
 				9CF7B7EE17145912007C2D69 /* libs */,
 				9CF7B94717145915007C2D69 /* Supporting Files */,
+				9CF7B96217145B3C007C2D69 /* HelloFoursquare.h */,
+				9CF7B96317145B3C007C2D69 /* HelloFoursquare.m */,
 			);
 			path = dibs;
 			sourceTree = "<group>";
@@ -832,6 +848,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		9CF7B95917145942007C2D69 /* BZFoursquare */ = {
+			isa = PBXGroup;
+			children = (
+				9CF7B95A17145942007C2D69 /* BZFoursquare.h */,
+				9CF7B95B17145942007C2D69 /* BZFoursquare.m */,
+				9CF7B95C17145942007C2D69 /* BZFoursquareRequest.h */,
+				9CF7B95D17145942007C2D69 /* BZFoursquareRequest.m */,
+			);
+			path = BZFoursquare;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1009,6 +1036,9 @@
 				9CF7B94D17145915007C2D69 /* AppDelegate.m in Sources */,
 				9CF7B95017145915007C2D69 /* HelloWorldLayer.m in Sources */,
 				9CF7B95317145915007C2D69 /* IntroLayer.m in Sources */,
+				9CF7B95E17145942007C2D69 /* BZFoursquare.m in Sources */,
+				9CF7B95F17145942007C2D69 /* BZFoursquareRequest.m in Sources */,
+				9CF7B96417145B3C007C2D69 /* HelloFoursquare.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1060,11 +1090,14 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
+				FOURSQUARE_CALLBACK_URL = "https://www.dibstick.com";
+				FOURSQUARE_CLIENT_ID = 2XMWXFMOYDSOF2MOFGX3GVC01433NYGS4PRKNH10TSBYUYHJ;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = dibs/Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"dibs/libs/kazmath/include\"";
 				INFOPLIST_FILE = dibs/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-ObjC",
@@ -1079,10 +1112,13 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
+				FOURSQUARE_CALLBACK_URL = "https://www.dibstick.com";
+				FOURSQUARE_CLIENT_ID = 2XMWXFMOYDSOF2MOFGX3GVC01433NYGS4PRKNH10TSBYUYHJ;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = dibs/Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"dibs/libs/kazmath/include\"";
 				INFOPLIST_FILE = dibs/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-ObjC",
