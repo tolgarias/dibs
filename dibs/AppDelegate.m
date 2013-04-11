@@ -140,6 +140,16 @@
 {
 	[[CCDirector sharedDirector] setNextDeltaTimeZero:YES];
 }
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+   // if (!url) {  return NO; }
+    
+    NSString *URLString = [[url absoluteURL] absoluteString];
+    [[NSUserDefaults standardUserDefaults] setObject:URLString forKey:@"url"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    NSLog(@"%@",URLString);
+    return YES;
+}
 
 - (void) dealloc
 {

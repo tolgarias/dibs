@@ -24,7 +24,7 @@
     return scene;
 }
 -(id) init {
-   foursquare_ = [[BZFoursquare alloc] initWithClientID:@"2XMWXFMOYDSOF2MOFGX3GVC01433NYGS4PRKNH10TSBYUYHJ" callbackURL:@"https://www.dibstick.com"];
+   foursquare_ = [[BZFoursquare alloc] initWithClientID:@"2XMWXFMOYDSOF2MOFGX3GVC01433NYGS4PRKNH10TSBYUYHJ" callbackURL:@"https://www.dibstick.com/foursquare.php"];
     foursquare_.sessionDelegate = self;
     [foursquare_ startAuthorization];
     return self;

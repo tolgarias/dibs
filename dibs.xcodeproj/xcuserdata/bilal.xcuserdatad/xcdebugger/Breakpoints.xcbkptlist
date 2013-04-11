@@ -8,19 +8,6 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "dibs/HelloFoursquare.m"
-         timestampString = "387211903.159996"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "27"
-         endingLineNumber = "27"
-         landmarkName = "-init"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "dibs/HelloFoursquare.m"
          timestampString = "387211991.707452"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
