@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9CE6FCAC1718464E00438AEA /* DibsMaibViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CE6FCAA1718464E00438AEA /* DibsMaibViewController.m */; };
+		9CE6FCAD1718464E00438AEA /* DibsMaibViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9CE6FCAB1718464E00438AEA /* DibsMaibViewController.xib */; };
 		9CF7B7C217145912007C2D69 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CF7B7C117145912007C2D69 /* QuartzCore.framework */; };
 		9CF7B7C417145912007C2D69 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CF7B7C317145912007C2D69 /* OpenGLES.framework */; };
 		9CF7B7C617145912007C2D69 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CF7B7C517145912007C2D69 /* OpenAL.framework */; };
@@ -141,6 +142,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9CE6FCA91718464E00438AEA /* DibsMaibViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DibsMaibViewController.h; sourceTree = "<group>"; };
+		9CE6FCAA1718464E00438AEA /* DibsMaibViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DibsMaibViewController.m; sourceTree = "<group>"; };
+		9CE6FCAB1718464E00438AEA /* DibsMaibViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DibsMaibViewController.xib; sourceTree = "<group>"; };
 		9CF7B7BD17145912007C2D69 /* dibs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dibs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CF7B7C117145912007C2D69 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		9CF7B7C317145912007C2D69 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -482,6 +486,9 @@
 				9CF7B94717145915007C2D69 /* Supporting Files */,
 				9CF7B96217145B3C007C2D69 /* HelloFoursquare.h */,
 				9CF7B96317145B3C007C2D69 /* HelloFoursquare.m */,
+				9CE6FCA91718464E00438AEA /* DibsMaibViewController.h */,
+				9CE6FCAA1718464E00438AEA /* DibsMaibViewController.m */,
+				9CE6FCAB1718464E00438AEA /* DibsMaibViewController.xib */,
 			);
 			path = dibs;
 			sourceTree = "<group>";
@@ -923,6 +930,7 @@
 				9CF7B7EA17145912007C2D69 /* Icon@2x.png in Resources */,
 				9CF7B7ED17145912007C2D69 /* iTunesArtwork in Resources */,
 				9CF7B92B17145915007C2D69 /* ChangeLog in Resources */,
+				9CE6FCAD1718464E00438AEA /* DibsMaibViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1040,6 +1048,7 @@
 				9CF7B95E17145942007C2D69 /* BZFoursquare.m in Sources */,
 				9CF7B95F17145942007C2D69 /* BZFoursquareRequest.m in Sources */,
 				9CF7B96417145B3C007C2D69 /* HelloFoursquare.m in Sources */,
+				9CE6FCAC1718464E00438AEA /* DibsMaibViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1149,6 +1158,7 @@
 				9CF7B95817145915007C2D69 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
