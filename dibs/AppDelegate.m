@@ -77,8 +77,11 @@
 
 	
 	// Create a Navigation Controller with the Director
-	navController_ = [[UINavigationController alloc] initWithRootViewController:director_];
-	navController_.navigationBarHidden = YES;
+	DibsMaibViewController * mainViewController = [[DibsMaibViewController alloc] initWithNibName:@"DibsMaibViewController" bundle:[NSBundle mainBundle]];
+    
+    //navController_ = [[UINavigationController alloc] initWithRootViewController:director_];
+    navController_ = [[UINavigationController alloc] initWithRootViewController:mainViewController];
+	navController_.navigationBarHidden = NO;
 	
 	// set the Navigation Controller as the root view controller
 //	[window_ addSubview:navController_.view];	// Generates flicker.
@@ -144,7 +147,7 @@
 {
    // if (!url) {  return NO; }
     
-    NSString *URLString = [[url absoluteURL] absoluteString];
+    NSString *URLString = [url query];
     [[NSUserDefaults standardUserDefaults] setObject:URLString forKey:@"url"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     NSLog(@"%@",URLString);

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9CE6FCAC1718464E00438AEA /* DibsMaibViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CE6FCAA1718464E00438AEA /* DibsMaibViewController.m */; };
 		9CF7B7C217145912007C2D69 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CF7B7C117145912007C2D69 /* QuartzCore.framework */; };
 		9CF7B7C417145912007C2D69 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CF7B7C317145912007C2D69 /* OpenGLES.framework */; };
 		9CF7B7C617145912007C2D69 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CF7B7C517145912007C2D69 /* OpenAL.framework */; };
