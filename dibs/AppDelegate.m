@@ -13,7 +13,7 @@
 
 @implementation AppController
 
-@synthesize window=window_, navController=navController_, director=director_;
+@synthesize window=window_, navController=navController_, director=director_,dibsMainViewController_ = dibsMainViewController,userViewController_ = userViewController ;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -77,12 +77,23 @@
 
 	
 	// Create a Navigation Controller with the Director
-	DibsMaibViewController * mainViewController = [[DibsMaibViewController alloc] initWithNibName:@"DibsMaibViewController" bundle:[NSBundle mainBundle]];
+    dibsMainViewController = [[DibsMaibViewController alloc] initWithNibName:@"DibsMaibViewController" bundle:[NSBundle mainBundle]];
+    userViewController = [[UserViewController alloc] initWithNibName:@"UserViewController" bundle:[NSBundle mainBundle]];
     
     //navController_ = [[UINavigationController alloc] initWithRootViewController:director_];
-    navController_ = [[UINavigationController alloc] initWithRootViewController:mainViewController];
+    //navController_ = [[UINavigationController alloc] initWithRootViewController:mainViewController];
+    //navController_ = [[UINavigationController alloc] initWithRootViewController:userViewController];
+    navController_ = [[UINavigationController alloc] init];
+    [navController_ setTitle:@"Welcome to Dibs"];
 	navController_.navigationBarHidden = NO;
-	
+	NSString* accessToken =  [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
+    if(accessToken!=nil && accessToken!=@""){
+        [navController_ pushViewController:userViewController animated:NO];
+        [[FoursquareManager sharedInstance] foursquare].accessToken = accessToken;
+    }
+    else {
+        [navController_ pushViewController:dibsMainViewController animated:NO];
+    }
 	// set the Navigation Controller as the root view controller
 //	[window_ addSubview:navController_.view];	// Generates flicker.
 	[window_ setRootViewController:navController_];
@@ -147,13 +158,17 @@
 {
    // if (!url) {  return NO; }
     
-    NSString *URLString = [url query];
-    [[NSUserDefaults standardUserDefaults] setObject:URLString forKey:@"url"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    NSLog(@"%@",URLString);
-    return YES;
+    //NSString *URLString = [url query];
+    //[[NSUserDefaults standardUserDefaults] setObject:URLString forKey:@"accessToken"];
+    //[[NSUserDefaults standardUserDefaults] synchronize];
+    //[navController_ pushViewController:userViewController animated:NO];
+    //NSLog(@"%@",URLString);
+    //return YES;
+    return [[FoursquareManager sharedInstance].foursquare handleOpenURL:url];
 }
-
+-(void) showUserView {
+    [navController_ pushViewController:userViewController animated:YES];
+}
 - (void) dealloc
 {
 	[window_ release];

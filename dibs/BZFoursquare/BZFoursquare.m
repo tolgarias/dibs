@@ -101,18 +101,19 @@
 }
 
 - (BOOL)handleOpenURL:(NSURL *)url {
-    if (!callbackURL_ || [[url absoluteString] rangeOfString:callbackURL_ options:(NSCaseInsensitiveSearch | NSAnchoredSearch)].length == 0) {
-        return NO;
-    }
-    NSString *fragment = [url fragment];
-    NSArray *pairs = [fragment componentsSeparatedByString:@"&"];
+    //if (!callbackURL_ || [[url absoluteString] rangeOfString:callbackURL_ options:(NSCaseInsensitiveSearch | NSAnchoredSearch)].length == 0) {
+      //  return NO;
+    //}
+    NSString *fragment = [url absoluteString];
+    NSArray *pairs = [fragment componentsSeparatedByString:@"?"];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    for (NSString *pair in pairs) {
+    //for (NSString *pair in pairs) {
+    NSString* pair = [pairs objectAtIndex:1];
         NSArray *kv = [pair componentsSeparatedByString:@"="];
         NSString *key = [kv objectAtIndex:0];
         NSString *val = [[kv objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         [parameters setObject:val forKey:key];
-    }
+    //}
     self.accessToken = [parameters objectForKey:@"access_token"];
     if (accessToken_) {
         if ([sessionDelegate_ respondsToSelector:@selector(foursquareDidAuthorize:)]) {
