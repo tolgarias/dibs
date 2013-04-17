@@ -11,6 +11,15 @@
 		9C32136F171C003B00557240 /* UserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C32136D171C003B00557240 /* UserViewController.xib */; };
 		9C321374171C1CA600557240 /* FoursquareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C321373171C1CA600557240 /* FoursquareManager.m */; };
 		9C321377171C434500557240 /* ScreenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C321376171C434400557240 /* ScreenManager.m */; };
+		9C321387171DAAA600557240 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C321386171DAAA600557240 /* Default-568h@2x.png */; };
+		9C321389171DAC1200557240 /* UserData.h in Sources */ = {isa = PBXBuildFile; fileRef = 9C321380171D7CE800557240 /* UserData.h */; };
+		9C32138A171DAC1200557240 /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C321381171D7CE800557240 /* UserData.m */; };
+		9C32138B171DAC1200557240 /* UrlConnectionManager.h in Sources */ = {isa = PBXBuildFile; fileRef = 9C32137D171D7B6000557240 /* UrlConnectionManager.h */; };
+		9C32138C171DAC1200557240 /* UrlConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C32137E171D7B6000557240 /* UrlConnectionManager.m */; };
+		9C321390171DB88700557240 /* UserListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C32138E171DB88700557240 /* UserListViewController.m */; };
+		9C321391171DB88700557240 /* UserListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C32138F171DB88700557240 /* UserListViewController.xib */; };
+		9C321393171EE9E700557240 /* SimpleTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C321392171EE9E600557240 /* SimpleTableCell.xib */; };
+		9C321396171EEC2000557240 /* SimpleTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C321395171EEC1F00557240 /* SimpleTableCell.m */; };
 		9CE6FCAC1718464E00438AEA /* DibsMaibViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CE6FCAA1718464E00438AEA /* DibsMaibViewController.m */; };
 		9CE6FCAD1718464E00438AEA /* DibsMaibViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9CE6FCAB1718464E00438AEA /* DibsMaibViewController.xib */; };
 		9CF7B7C217145912007C2D69 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CF7B7C117145912007C2D69 /* QuartzCore.framework */; };
@@ -153,6 +162,17 @@
 		9C321373171C1CA600557240 /* FoursquareManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FoursquareManager.m; path = Foursquare/FoursquareManager.m; sourceTree = "<group>"; };
 		9C321375171C434400557240 /* ScreenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenManager.h; sourceTree = "<group>"; };
 		9C321376171C434400557240 /* ScreenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenManager.m; sourceTree = "<group>"; };
+		9C32137D171D7B6000557240 /* UrlConnectionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UrlConnectionManager.h; sourceTree = "<group>"; };
+		9C32137E171D7B6000557240 /* UrlConnectionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UrlConnectionManager.m; sourceTree = "<group>"; };
+		9C321380171D7CE800557240 /* UserData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
+		9C321381171D7CE800557240 /* UserData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserData.m; sourceTree = "<group>"; usesTabs = 0; };
+		9C321386171DAAA600557240 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		9C32138D171DB88600557240 /* UserListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserListViewController.h; sourceTree = "<group>"; };
+		9C32138E171DB88700557240 /* UserListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserListViewController.m; sourceTree = "<group>"; };
+		9C32138F171DB88700557240 /* UserListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserListViewController.xib; sourceTree = "<group>"; };
+		9C321392171EE9E600557240 /* SimpleTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimpleTableCell.xib; sourceTree = "<group>"; };
+		9C321394171EEC1F00557240 /* SimpleTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleTableCell.h; sourceTree = "<group>"; };
+		9C321395171EEC1F00557240 /* SimpleTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleTableCell.m; sourceTree = "<group>"; };
 		9CE6FCA91718464E00438AEA /* DibsMaibViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DibsMaibViewController.h; sourceTree = "<group>"; };
 		9CE6FCAA1718464E00438AEA /* DibsMaibViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DibsMaibViewController.m; sourceTree = "<group>"; };
 		9CE6FCAB1718464E00438AEA /* DibsMaibViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DibsMaibViewController.xib; sourceTree = "<group>"; };
@@ -457,9 +477,28 @@
 			name = Foursquare;
 			sourceTree = "<group>";
 		};
+		9C32137C171D7B3500557240 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				9C32137D171D7B6000557240 /* UrlConnectionManager.h */,
+				9C32137E171D7B6000557240 /* UrlConnectionManager.m */,
+			);
+			name = utils;
+			sourceTree = "<group>";
+		};
+		9C32137F171D7C1600557240 /* user */ = {
+			isa = PBXGroup;
+			children = (
+				9C321380171D7CE800557240 /* UserData.h */,
+				9C321381171D7CE800557240 /* UserData.m */,
+			);
+			name = user;
+			sourceTree = "<group>";
+		};
 		9CF7B7B217145911007C2D69 = {
 			isa = PBXGroup;
 			children = (
+				9C321386171DAAA600557240 /* Default-568h@2x.png */,
 				9CF7B7D317145912007C2D69 /* dibs */,
 				9CF7B7C017145912007C2D69 /* Frameworks */,
 				9CF7B7BE17145912007C2D69 /* Products */,
@@ -494,6 +533,8 @@
 		9CF7B7D317145912007C2D69 /* dibs */ = {
 			isa = PBXGroup;
 			children = (
+				9C32137F171D7C1600557240 /* user */,
+				9C32137C171D7B3500557240 /* utils */,
 				9C321371171C1C7700557240 /* Foursquare */,
 				9CF7B95917145942007C2D69 /* BZFoursquare */,
 				9CF7B94B17145915007C2D69 /* AppDelegate.h */,
@@ -515,6 +556,12 @@
 				9C32136D171C003B00557240 /* UserViewController.xib */,
 				9C321375171C434400557240 /* ScreenManager.h */,
 				9C321376171C434400557240 /* ScreenManager.m */,
+				9C32138D171DB88600557240 /* UserListViewController.h */,
+				9C32138E171DB88700557240 /* UserListViewController.m */,
+				9C32138F171DB88700557240 /* UserListViewController.xib */,
+				9C321394171EEC1F00557240 /* SimpleTableCell.h */,
+				9C321395171EEC1F00557240 /* SimpleTableCell.m */,
+				9C321392171EE9E600557240 /* SimpleTableCell.xib */,
 			);
 			path = dibs;
 			sourceTree = "<group>";
@@ -958,6 +1005,9 @@
 				9CF7B92B17145915007C2D69 /* ChangeLog in Resources */,
 				9CE6FCAD1718464E00438AEA /* DibsMaibViewController.xib in Resources */,
 				9C32136F171C003B00557240 /* UserViewController.xib in Resources */,
+				9C321387171DAAA600557240 /* Default-568h@2x.png in Resources */,
+				9C321391171DB88700557240 /* UserListViewController.xib in Resources */,
+				9C321393171EE9E700557240 /* SimpleTableCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -968,6 +1018,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C321389171DAC1200557240 /* UserData.h in Sources */,
+				9C32138A171DAC1200557240 /* UserData.m in Sources */,
+				9C32138B171DAC1200557240 /* UrlConnectionManager.h in Sources */,
+				9C32138C171DAC1200557240 /* UrlConnectionManager.m in Sources */,
 				9CF7B7F217145912007C2D69 /* CCAction.m in Sources */,
 				9CF7B7F517145912007C2D69 /* CCActionCamera.m in Sources */,
 				9CF7B7F817145912007C2D69 /* CCActionCatmullRom.m in Sources */,
@@ -1079,6 +1133,8 @@
 				9C32136E171C003B00557240 /* UserViewController.m in Sources */,
 				9C321374171C1CA600557240 /* FoursquareManager.m in Sources */,
 				9C321377171C434500557240 /* ScreenManager.m in Sources */,
+				9C321390171DB88700557240 /* UserListViewController.m in Sources */,
+				9C321396171EEC2000557240 /* SimpleTableCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1135,6 +1191,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = dibs/Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "\"dibs/libs/kazmath/include\"";
 				INFOPLIST_FILE = dibs/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
@@ -1156,6 +1213,7 @@
 				FOURSQUARE_CLIENT_ID = 2XMWXFMOYDSOF2MOFGX3GVC01433NYGS4PRKNH10TSBYUYHJ;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = dibs/Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "\"dibs/libs/kazmath/include\"";
 				INFOPLIST_FILE = dibs/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;

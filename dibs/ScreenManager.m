@@ -24,5 +24,12 @@ static ScreenManager *sharedInstance;
 -(void) showUserView {
     AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
     [app showUserView];
+ }
+
+-(void) showUserListView {
+    AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
+    [app showUserListView];
+    
+    
 }
 @end

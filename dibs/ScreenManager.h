@@ -13,4 +13,5 @@
 +(ScreenManager*) sharedInstance;
 
 -(void) showUserView;
+-(void) showUserListView;
 @end

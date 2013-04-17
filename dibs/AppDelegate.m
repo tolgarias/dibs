@@ -13,7 +13,7 @@
 
 @implementation AppController
 
-@synthesize window=window_, navController=navController_, director=director_,dibsMainViewController_ = dibsMainViewController,userViewController_ = userViewController ;
+@synthesize window=window_, navController=navController_, director=director_,dibsMainViewController_ = dibsMainViewController,userViewController_ = userViewController,userListViewController_ = userListViewController ;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -79,13 +79,16 @@
 	// Create a Navigation Controller with the Director
     dibsMainViewController = [[DibsMaibViewController alloc] initWithNibName:@"DibsMaibViewController" bundle:[NSBundle mainBundle]];
     userViewController = [[UserViewController alloc] initWithNibName:@"UserViewController" bundle:[NSBundle mainBundle]];
+    userListViewController = [[UserListViewController alloc] initWithNibName:@"UserListViewController" bundle:[NSBundle mainBundle]];
     
     //navController_ = [[UINavigationController alloc] initWithRootViewController:director_];
     //navController_ = [[UINavigationController alloc] initWithRootViewController:mainViewController];
     //navController_ = [[UINavigationController alloc] initWithRootViewController:userViewController];
     navController_ = [[UINavigationController alloc] init];
+   // navController_ = [[UINavigationController alloc] initWithRootViewController:userListViewController];
     [navController_ setTitle:@"Welcome to Dibs"];
 	navController_.navigationBarHidden = NO;
+
 	NSString* accessToken =  [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
     if(accessToken!=nil && accessToken!=@""){
         [navController_ pushViewController:userViewController animated:NO];
@@ -94,6 +97,7 @@
     else {
         [navController_ pushViewController:dibsMainViewController animated:NO];
     }
+    //[navController_ pushViewController:userListViewController animated:YES];
 	// set the Navigation Controller as the root view controller
 //	[window_ addSubview:navController_.view];	// Generates flicker.
 	[window_ setRootViewController:navController_];
@@ -169,6 +173,11 @@
 -(void) showUserView {
     [navController_ pushViewController:userViewController animated:YES];
 }
+
+-(void) showUserListView {
+    [navController_ pushViewController:userListViewController animated:YES];
+}
+
 - (void) dealloc
 {
 	[window_ release];

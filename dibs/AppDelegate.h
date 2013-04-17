@@ -11,6 +11,8 @@
 #import "DibsMaibViewController.h"
 #import "UserViewController.h"
 #import "FoursquareManager.h"
+#import "UserListViewController.h"
+
 @interface AppController : NSObject <UIApplicationDelegate, CCDirectorDelegate>
 {
 	UIWindow *window_;
@@ -24,7 +26,9 @@
 @property (readonly) CCDirectorIOS *director;
 @property (nonatomic,retain) DibsMaibViewController *dibsMainViewController_;
 @property (nonatomic,retain) UserViewController *userViewController_;
+@property (nonatomic,retain) UserListViewController *userListViewController_;
 
 -(void) showUserView;
+-(void) showUserListView;
 
 @end
