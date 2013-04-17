@@ -8,21 +8,22 @@
 
 #import "UserListViewController.h"
 #import "SimpleTableCell.h"
-
+#import "UserData.h"
+#import "UrlConnectionManager.h"
 @interface UserListViewController ()
 
 @end
 
 @implementation UserListViewController
 
-@synthesize tableData;
+@synthesize users,userList,userTableView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        
+        users = [[NSArray alloc] init];
     }
     return self;
 }
@@ -31,19 +32,31 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    tableData = [[NSArray alloc] initWithObjects:@"tolga",@"molga",nil];
+    //[tableView reloadData];
+    //tableData = [[NSArray alloc] initWithObjects:@"tolga",@"molga",nil];
+    NSString *postData = [NSString stringWithFormat:@"accessToken=%@&venueId=%@",[UserData sharedInstance].accessToken,[UserData sharedInstance].lastCheckInVenue];
+    NSLog(@"%@",postData);
+    [UrlConnectionManager sharedInstance].delegate = self;
+    [UrlConnectionManager sharedInstance].selector = @selector(onUserListReceived:);
+    [[UrlConnectionManager sharedInstance] postData:postData withUrl:@"https://www.dibstick.com/dibs_userlist.php"];
 }
-
+-(void) onUserListReceived:(NSDictionary*) jsonData {
+    NSLog(@"%@",jsonData);
+    users = [jsonData objectForKey:@"userList"];
+    [userTableView reloadData];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [tableData count];
+    NSLog(@"%@",users);
+    return [users count];
+    //return 0;
 }
 
 
@@ -59,12 +72,17 @@
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SimpleTableCell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
-    
-    cell.nameLabel.text = @"deneme name";
-    cell.timeLabel.text=@"denem time";
+    NSLog(@"index path: %i",indexPath.row);
+    NSDictionary *userData = [users objectAtIndex:indexPath.row];
+    NSNumber *createdAt =[[users objectAtIndex:indexPath.row] objectForKey:@"lastCheckInDate"];
+    NSString *bar = [[NSDate dateWithTimeIntervalSince1970:[createdAt intValue]] description];
+
+    cell.nameLabel.text = [[users objectAtIndex:indexPath.row] objectForKey:@"name"];
+    cell.timeLabel.text=bar;
     //cell.thumbnailImageView.image = [UIImage imageNamed:@"Icon.png"];
-    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://is0.4sqi.net/userpix_thumbs/T2HYVSRDYGP2GN0E.jpg"]]];
+    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[[users objectAtIndex:indexPath.row] objectForKey:@"photo"]]]];
     cell.thumbnailImageView.image = image;
+    
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

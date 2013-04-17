@@ -12,5 +12,7 @@
 {
     
 }
-@property (nonatomic,retain) NSArray *tableData;
+@property (nonatomic,retain) NSArray *users;
+@property (nonatomic,retain) NSDictionary *userList;
+@property (nonatomic,retain) IBOutlet UITableView *userTableView;
 @end
