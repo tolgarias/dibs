@@ -7,7 +7,7 @@
 //
 
 #import "FoursquareManager.h"
-#import "ScreenManager.h"
+#import "AppDelegate.h"
 
 
 @implementation FoursquareManager
@@ -102,9 +102,12 @@ static FoursquareManager* sharedInstance;
     //NSIndexPath *indexPath = [NSIndexPath indexPathForRow:kAccessTokenRow inSection:kAuthenticationSection];
     //NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
     //[self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+    NSLog(@"forus:%@",foursquare.accessToken);
     [[NSUserDefaults standardUserDefaults] setObject:foursquare.accessToken forKey:@"accessToken"];
     //[m_delegate performSelector:m_selector];
-    [[ScreenManager sharedInstance] showUserView];
+    
+    AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
+    [app showUserView];
     
    // NSLog(@"login oldu");
 }

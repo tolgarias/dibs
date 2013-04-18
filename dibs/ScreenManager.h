@@ -14,4 +14,5 @@
 
 -(void) showUserView;
 -(void) showUserListView;
+-(void) showLoginView;
 @end

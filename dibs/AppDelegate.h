@@ -13,6 +13,12 @@
 #import "FoursquareManager.h"
 #import "UserListViewController.h"
 
+typedef enum {
+    kUserView = 1,
+    kUserListView = 2,
+    kMainView = 3
+    } viewToShow;
+
 @interface AppController : NSObject <UIApplicationDelegate, CCDirectorDelegate>
 {
 	UIWindow *window_;
@@ -30,5 +36,7 @@
 
 -(void) showUserView;
 -(void) showUserListView;
+-(void) showLoginView;
 
+-(void) showView:(viewToShow) view;
 @end

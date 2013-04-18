@@ -11,6 +11,7 @@
 #import "UrlConnectionManager.h"
 #import "ScreenManager.h"
 
+
 @interface UserViewController ()
 
 @end
@@ -33,11 +34,22 @@
     // Do any additional setup after loading the view from its nib.
     //UIImage *imageYouWantToPass = [UIImage imageNamed:@"Icon-72.png"];
     //[profileImg setImage:imageYouWantToPass];
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc]
+                                  //initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                  initWithImage:[UIImage imageNamed:@"Icon.png"] style:UIBarButtonItemStylePlain
+                                  target:self
+                                  action:@selector(logoutButtonPressed)];
+    [[self navigationItem] setLeftBarButtonItem:barButton];
+    
     [FoursquareManager sharedInstance].delegate = self;
     [FoursquareManager sharedInstance].selector = @selector(onUserDataReceived:);
     [[FoursquareManager sharedInstance] getUserData];
 }
-
+-(void) logoutButtonPressed {
+    [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"accessToken"];
+    [[ScreenManager sharedInstance] showLoginView];
+    
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -89,6 +101,7 @@
 }
 -(IBAction)ShowUserList:(id)sender
 {
-    [[ScreenManager sharedInstance] showUserListView];
+    AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
+    [app showUserListView];
 }
 @end

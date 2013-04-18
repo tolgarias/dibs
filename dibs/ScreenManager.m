@@ -32,4 +32,11 @@ static ScreenManager *sharedInstance;
     
     
 }
+
+-(void) showLoginView {
+    AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
+    [app showLoginView];
+    
+    
+}
 @end

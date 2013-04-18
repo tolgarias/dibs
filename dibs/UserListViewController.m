@@ -16,14 +16,15 @@
 
 @implementation UserListViewController
 
-@synthesize users,userList,userTableView;
+@synthesize users=users_,userList,userTableView,userDataArray;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        users = [[NSArray alloc] init];
+        users_ = [[NSArray alloc] init];
+        userDataArray = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -42,7 +43,11 @@
 }
 -(void) onUserListReceived:(NSDictionary*) jsonData {
     NSLog(@"%@",jsonData);
-    users = [jsonData objectForKey:@"userList"];
+    users_ = (NSArray*)[jsonData objectForKey:@"userList"];
+    for (NSDictionary* dic in users_) {
+        //NSLog(@"name:%@",[dic objectForKey:@"name"]);
+        [userDataArray addObject:dic];
+    }
     [userTableView reloadData];
 }
 - (void)didReceiveMemoryWarning
@@ -54,8 +59,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"%@",users);
-    return [users count];
+    //NSLog(@"%@",users);
+    return [users_ count];
     //return 0;
 }
 
@@ -72,15 +77,13 @@
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SimpleTableCell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
-    NSLog(@"index path: %i",indexPath.row);
-    NSDictionary *userData = [users objectAtIndex:indexPath.row];
-    NSNumber *createdAt =[[users objectAtIndex:indexPath.row] objectForKey:@"lastCheckInDate"];
+    NSNumber *createdAt =(NSNumber*)[[userDataArray objectAtIndex:indexPath.row] objectForKey:@"lastCheckInDate"];
     NSString *bar = [[NSDate dateWithTimeIntervalSince1970:[createdAt intValue]] description];
-
-    cell.nameLabel.text = [[users objectAtIndex:indexPath.row] objectForKey:@"name"];
+    
+    cell.nameLabel.text = [[userDataArray objectAtIndex:0] objectForKey:@"name"];
     cell.timeLabel.text=bar;
     //cell.thumbnailImageView.image = [UIImage imageNamed:@"Icon.png"];
-    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[[users objectAtIndex:indexPath.row] objectForKey:@"photo"]]]];
+    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[[userDataArray objectAtIndex:indexPath.row] objectForKey:@"photo"]]]];
     cell.thumbnailImageView.image = image;
     
     return cell;

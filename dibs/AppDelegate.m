@@ -21,82 +21,29 @@
 	window_ = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
 
-	// Create an CCGLView with a RGB565 color buffer, and a depth buffer of 0-bits
-	CCGLView *glView = [CCGLView viewWithFrame:[window_ bounds]
-								   pixelFormat:kEAGLColorFormatRGB565	//kEAGLColorFormatRGBA8
-								   depthFormat:0	//GL_DEPTH_COMPONENT24_OES
-							preserveBackbuffer:NO
-									sharegroup:nil
-								 multiSampling:NO
-							   numberOfSamples:0];
-
-	director_ = (CCDirectorIOS*) [CCDirector sharedDirector];
-
-	director_.wantsFullScreenLayout = YES;
-
-	// Display FSP and SPF
-	[director_ setDisplayStats:YES];
-
-	// set FPS at 60
-	[director_ setAnimationInterval:1.0/60];
-
-	// attach the openglView to the director
-	[director_ setView:glView];
-
-	// for rotation and other messages
-	[director_ setDelegate:self];
-
-	// 2D projection
-	[director_ setProjection:kCCDirectorProjection2D];
-//	[director setProjection:kCCDirectorProjection3D];
-
-	// Enables High Res mode (Retina Display) on iPhone 4 and maintains low res on all other devices
-	if( ! [director_ enableRetinaDisplay:YES] )
-		CCLOG(@"Retina Display Not supported");
-
-	// Default texture format for PNG/BMP/TIFF/JPEG/GIF images
-	// It can be RGBA8888, RGBA4444, RGB5_A1, RGB565
-	// You can change anytime.
-	[CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
-
-	// If the 1st suffix is not found and if fallback is enabled then fallback suffixes are going to searched. If none is found, it will try with the name without suffix.
-	// On iPad HD  : "-ipadhd", "-ipad",  "-hd"
-	// On iPad     : "-ipad", "-hd"
-	// On iPhone HD: "-hd"
-	CCFileUtils *sharedFileUtils = [CCFileUtils sharedFileUtils];
-	[sharedFileUtils setEnableFallbackSuffixes:NO];				// Default: NO. No fallback suffixes are going to be used
-	[sharedFileUtils setiPhoneRetinaDisplaySuffix:@"-hd"];		// Default on iPhone RetinaDisplay is "-hd"
-	[sharedFileUtils setiPadSuffix:@"-ipad"];					// Default on iPad is "ipad"
-	[sharedFileUtils setiPadRetinaDisplaySuffix:@"-ipadhd"];	// Default on iPad RetinaDisplay is "-ipadhd"
-
-	// Assume that PVR images have premultiplied alpha
-	[CCTexture2D PVRImagesHavePremultipliedAlpha:YES];
-
-	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
-	[director_ pushScene: [IntroLayer scene]]; 
-
-	
 	// Create a Navigation Controller with the Director
-    dibsMainViewController = [[DibsMaibViewController alloc] initWithNibName:@"DibsMaibViewController" bundle:[NSBundle mainBundle]];
-    userViewController = [[UserViewController alloc] initWithNibName:@"UserViewController" bundle:[NSBundle mainBundle]];
-    userListViewController = [[UserListViewController alloc] initWithNibName:@"UserListViewController" bundle:[NSBundle mainBundle]];
+    //dibsMainViewController = [[DibsMaibViewController alloc] initWithNibName:@"DibsMaibViewController" bundle:[NSBundle mainBundle]];
+    //userViewController = [[UserViewController alloc] initWithNibName:@"UserViewController" bundle:[NSBundle mainBundle]];
+    //userListViewController = [[UserListViewController alloc] initWithNibName:@"UserListViewController" bundle:[NSBundle mainBundle]];
     
-    //navController_ = [[UINavigationController alloc] initWithRootViewController:director_];
-    //navController_ = [[UINavigationController alloc] initWithRootViewController:mainViewController];
-    //navController_ = [[UINavigationController alloc] initWithRootViewController:userViewController];
-    navController_ = [[UINavigationController alloc] init];
-   // navController_ = [[UINavigationController alloc] initWithRootViewController:userListViewController];
-    [navController_ setTitle:@"Welcome to Dibs"];
-	navController_.navigationBarHidden = NO;
-
-	NSString* accessToken =  [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
-    if(accessToken!=nil && accessToken!=@""){
-        [navController_ pushViewController:userViewController animated:NO];
+    
+    
+    NSString* accessToken =  [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
+    NSLog(@"accesToken:%@",accessToken);
+    if(accessToken!=nil && ![accessToken isEqualToString:@""]){
         [[FoursquareManager sharedInstance] foursquare].accessToken = accessToken;
+        UserViewController *viewController = [[UserViewController alloc] initWithNibName:@"UserViewController" bundle:[NSBundle mainBundle]];
+        navController_ = [[UINavigationController alloc] initWithRootViewController:viewController];
+        [viewController release];
     }
     else {
-        [navController_ pushViewController:dibsMainViewController animated:NO];
+        DibsMaibViewController *viewController = [[DibsMaibViewController alloc] initWithNibName:@"DibsMaibViewController" bundle:[NSBundle mainBundle]];
+        navController_ = [[UINavigationController alloc] initWithRootViewController:viewController];
+        [viewController release];
     }
+    
+    navController_.title = @"Welcome to Dibs";
+	navController_.navigationBarHidden = NO;
     //[navController_ pushViewController:userListViewController animated:YES];
 	// set the Navigation Controller as the root view controller
 //	[window_ addSubview:navController_.view];	// Generates flicker.
@@ -171,13 +118,39 @@
     return [[FoursquareManager sharedInstance].foursquare handleOpenURL:url];
 }
 -(void) showUserView {
-    [navController_ pushViewController:userViewController animated:YES];
+    UserViewController *viewController = [[UserViewController alloc] initWithNibName:@"UserViewController" bundle:[NSBundle mainBundle]];
+    [navController_ pushViewController:viewController animated:YES];
+    [viewController release];
 }
 
 -(void) showUserListView {
-    [navController_ pushViewController:userListViewController animated:YES];
+    UserListViewController *viewController = [[UserListViewController alloc] initWithNibName:@"UserListViewController" bundle:[NSBundle mainBundle]];
+    [navController_ pushViewController:viewController animated:YES];
+    [viewController release];
 }
 
+-(void) showLoginView {
+    DibsMaibViewController *viewController = [[DibsMaibViewController alloc] initWithNibName:@"DibsMaibViewController" bundle:[NSBundle mainBundle]];
+    [navController_ pushViewController:viewController animated:YES];
+    [viewController release];
+}
+
+-(void) showView:(viewToShow)view {
+    
+    switch (view) {
+        case kMainView:
+            [self showLoginView];
+            break;
+        case kUserListView:
+            [self showUserListView];
+            break;
+        case kUserView:
+            [self showUserView];
+            break;
+        default:
+            break;
+    }
+}
 - (void) dealloc
 {
 	[window_ release];
