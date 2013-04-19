@@ -107,14 +107,6 @@
 }
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
-   // if (!url) {  return NO; }
-    
-    //NSString *URLString = [url query];
-    //[[NSUserDefaults standardUserDefaults] setObject:URLString forKey:@"accessToken"];
-    //[[NSUserDefaults standardUserDefaults] synchronize];
-    //[navController_ pushViewController:userViewController animated:NO];
-    //NSLog(@"%@",URLString);
-    //return YES;
     return [[FoursquareManager sharedInstance].foursquare handleOpenURL:url];
 }
 -(void) showUserView {

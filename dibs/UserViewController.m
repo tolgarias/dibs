@@ -10,7 +10,7 @@
 #import "UserData.h"
 #import "UrlConnectionManager.h"
 #import "ScreenManager.h"
-
+#import "Utils.h"
 
 @interface UserViewController ()
 
@@ -44,6 +44,7 @@
     [FoursquareManager sharedInstance].delegate = self;
     [FoursquareManager sharedInstance].selector = @selector(onUserDataReceived:);
     [[FoursquareManager sharedInstance] getUserData];
+    [[self navigationItem] setTitle:@"Play Dibs"];
 }
 -(void) logoutButtonPressed {
     [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"accessToken"];
@@ -71,9 +72,9 @@
     
     NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
     NSString *name = [NSString stringWithFormat:@"%@ %@",firstName,lastName];
-    NSString *bar = [[NSDate dateWithTimeIntervalSince1970:[createdAt intValue]] description];
+    NSString *bar = [[Utils sharedInstance] getIntervalString:createdAt];
     
-    if([UserData sharedInstance].lastCheckInVenue!=venueId){
+    if(![[UserData sharedInstance].lastCheckInVenue isEqualToString:venueId]){
         [UserData sharedInstance].name = name;
         [UserData sharedInstance].accessToken = accessToken;
         [UserData sharedInstance].lastCheckInVenue = venueId;

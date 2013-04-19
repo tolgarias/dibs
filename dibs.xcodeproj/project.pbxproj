@@ -20,6 +20,7 @@
 		9C321391171DB88700557240 /* UserListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C32138F171DB88700557240 /* UserListViewController.xib */; };
 		9C321393171EE9E700557240 /* SimpleTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C321392171EE9E600557240 /* SimpleTableCell.xib */; };
 		9C321396171EEC2000557240 /* SimpleTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C321395171EEC1F00557240 /* SimpleTableCell.m */; };
+		9CB114E61721728E00FA59EE /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CB114E51721728E00FA59EE /* Utils.m */; };
 		9CE6FCAC1718464E00438AEA /* DibsMaibViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CE6FCAA1718464E00438AEA /* DibsMaibViewController.m */; };
 		9CE6FCAD1718464E00438AEA /* DibsMaibViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9CE6FCAB1718464E00438AEA /* DibsMaibViewController.xib */; };
 		9CF7B7C217145912007C2D69 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CF7B7C117145912007C2D69 /* QuartzCore.framework */; };
@@ -173,6 +174,8 @@
 		9C321392171EE9E600557240 /* SimpleTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimpleTableCell.xib; sourceTree = "<group>"; };
 		9C321394171EEC1F00557240 /* SimpleTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleTableCell.h; sourceTree = "<group>"; };
 		9C321395171EEC1F00557240 /* SimpleTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleTableCell.m; sourceTree = "<group>"; };
+		9CB114E41721728D00FA59EE /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		9CB114E51721728E00FA59EE /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		9CE6FCA91718464E00438AEA /* DibsMaibViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DibsMaibViewController.h; sourceTree = "<group>"; };
 		9CE6FCAA1718464E00438AEA /* DibsMaibViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DibsMaibViewController.m; sourceTree = "<group>"; };
 		9CE6FCAB1718464E00438AEA /* DibsMaibViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DibsMaibViewController.xib; sourceTree = "<group>"; };
@@ -482,6 +485,8 @@
 			children = (
 				9C32137D171D7B6000557240 /* UrlConnectionManager.h */,
 				9C32137E171D7B6000557240 /* UrlConnectionManager.m */,
+				9CB114E41721728D00FA59EE /* Utils.h */,
+				9CB114E51721728E00FA59EE /* Utils.m */,
 			);
 			name = utils;
 			sourceTree = "<group>";
@@ -1135,6 +1140,7 @@
 				9C321377171C434500557240 /* ScreenManager.m in Sources */,
 				9C321390171DB88700557240 /* UserListViewController.m in Sources */,
 				9C321396171EEC2000557240 /* SimpleTableCell.m in Sources */,
+				9CB114E61721728E00FA59EE /* Utils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

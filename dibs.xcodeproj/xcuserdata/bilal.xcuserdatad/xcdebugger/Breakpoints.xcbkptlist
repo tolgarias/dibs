@@ -33,26 +33,13 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "dibs/AppDelegate.m"
-         timestampString = "387991960.188407"
+         filePath = "dibs/UserViewController.m"
+         timestampString = "388071849.579362"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "121"
-         endingLineNumber = "121"
-         landmarkName = "-showUserView"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "dibs/AppDelegate.m"
-         timestampString = "387991989.742664"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "31"
-         endingLineNumber = "31"
-         landmarkName = "-application:didFinishLaunchingWithOptions:"
+         startingLineNumber = "78"
+         endingLineNumber = "78"
+         landmarkName = "-onUserDataReceived:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

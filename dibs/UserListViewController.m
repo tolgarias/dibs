@@ -10,6 +10,7 @@
 #import "SimpleTableCell.h"
 #import "UserData.h"
 #import "UrlConnectionManager.h"
+#import "Utils.h"
 @interface UserListViewController ()
 
 @end
@@ -78,7 +79,7 @@
         cell = [nib objectAtIndex:0];
     }
     NSNumber *createdAt =(NSNumber*)[[userDataArray objectAtIndex:indexPath.row] objectForKey:@"lastCheckInDate"];
-    NSString *bar = [[NSDate dateWithTimeIntervalSince1970:[createdAt intValue]] description];
+    NSString *bar = [[Utils sharedInstance] getIntervalString:createdAt];
     
     cell.nameLabel.text = [[userDataArray objectAtIndex:0] objectForKey:@"name"];
     cell.timeLabel.text=bar;
