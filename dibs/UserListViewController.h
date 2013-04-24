@@ -16,4 +16,5 @@
 @property (nonatomic,retain) NSDictionary *userList;
 @property (nonatomic,retain) IBOutlet UITableView *userTableView;
 @property (nonatomic,retain) NSMutableArray* userDataArray;
+@property (nonatomic,retain) NSNumber *selectedIndex;
 @end

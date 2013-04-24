@@ -33,13 +33,13 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "dibs/UserViewController.m"
-         timestampString = "388071849.579362"
+         filePath = "dibs/UserListViewController.m"
+         timestampString = "388506256.246548"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "78"
-         endingLineNumber = "78"
-         landmarkName = "-onUserDataReceived:"
+         startingLineNumber = "37"
+         endingLineNumber = "37"
+         landmarkName = "-likeButtonPressed"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

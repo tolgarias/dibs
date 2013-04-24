@@ -17,7 +17,7 @@
 
 @implementation UserListViewController
 
-@synthesize users=users_,userList,userTableView,userDataArray;
+@synthesize users=users_,userList,userTableView,userDataArray,selectedIndex;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,10 +26,19 @@
         // Custom initialization
         users_ = [[NSArray alloc] init];
         userDataArray = [[NSMutableArray alloc] init];
+        
+            UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonItemStylePlain target:self action:@selector(likeButtonPressed)];
+            [[self navigationItem] setRightBarButtonItem:barButton];
+        
     }
     return self;
 }
-
+-(void) likeButtonPressed {
+    NSString *postData = [NSString stringWithFormat:@"accessToken=%@&likeAccessToken=%@&venueId=%@",[UserData sharedInstance].accessToken,[UserData sharedInstance].lastCheckInVenue,[[userDataArray objectAtIndex:[selectedIndex intValue]] objectForKey:@"accessToken"]];
+    NSLog(@"postData:%@",postData);
+    [[UrlConnectionManager sharedInstance] postData:postData withUrl:@"https://www.dibstick.com/dibs_likeuser.php"];
+    
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -61,10 +70,14 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     //NSLog(@"%@",users);
+
     return [users_ count];
     //return 0;
 }
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    selectedIndex = [NSNumber numberWithInt:indexPath.row];
+    NSLog(@"selected row:%i",indexPath.row);
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
