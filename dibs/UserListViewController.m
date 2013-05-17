@@ -36,8 +36,13 @@
 -(void) likeButtonPressed {
     NSString *postData = [NSString stringWithFormat:@"accessToken=%@&likeAccessToken=%@&venueId=%@",[UserData sharedInstance].accessToken,[UserData sharedInstance].lastCheckInVenue,[[userDataArray objectAtIndex:[selectedIndex intValue]] objectForKey:@"accessToken"]];
     NSLog(@"postData:%@",postData);
+    [UrlConnectionManager sharedInstance].delegate = self;
+    [UrlConnectionManager sharedInstance].selector = @selector(onLikeResponse:);
     [[UrlConnectionManager sharedInstance] postData:postData withUrl:@"https://www.dibstick.com/dibs_likeuser.php"];
     
+}
+-(void) onLikeResponse:(NSDictionary*) jsonData{
+    NSLog(@"%@",jsonData);
 }
 - (void)viewDidLoad
 {
