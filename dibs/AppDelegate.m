@@ -10,6 +10,7 @@
 
 #import "AppDelegate.h"
 #import "IntroLayer.h"
+#import "ChatViewController.h"
 
 @implementation AppController
 
@@ -30,7 +31,7 @@
     
     NSString* accessToken =  [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
     NSLog(@"accesToken:%@",accessToken);
-    if(accessToken!=nil && ![accessToken isEqualToString:@""]){
+    /*if(accessToken!=nil && ![accessToken isEqualToString:@""]){
         [[FoursquareManager sharedInstance] foursquare].accessToken = accessToken;
         UserViewController *viewController = [[UserViewController alloc] initWithNibName:@"UserViewController" bundle:[NSBundle mainBundle]];
         navController_ = [[UINavigationController alloc] initWithRootViewController:viewController];
@@ -40,7 +41,11 @@
         DibsMaibViewController *viewController = [[DibsMaibViewController alloc] initWithNibName:@"DibsMaibViewController" bundle:[NSBundle mainBundle]];
         navController_ = [[UINavigationController alloc] initWithRootViewController:viewController];
         [viewController release];
-    }
+    }*/
+    
+    ChatViewController *viewController = [[ChatViewController alloc] initWithNibName:@"ChatViewController" bundle:[NSBundle mainBundle]];
+    navController_ = [[UINavigationController alloc] initWithRootViewController:viewController];
+    [viewController release];
     
     navController_.title = @"Welcome to Dibs";
 	navController_.navigationBarHidden = NO;

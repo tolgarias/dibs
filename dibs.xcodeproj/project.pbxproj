@@ -20,6 +20,12 @@
 		9C321391171DB88700557240 /* UserListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C32138F171DB88700557240 /* UserListViewController.xib */; };
 		9C321393171EE9E700557240 /* SimpleTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C321392171EE9E600557240 /* SimpleTableCell.xib */; };
 		9C321396171EEC2000557240 /* SimpleTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C321395171EEC1F00557240 /* SimpleTableCell.m */; };
+		9C93F31317437C2B00C561C8 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C93F31117437C2B00C561C8 /* ChatViewController.m */; };
+		9C93F31417437C2B00C561C8 /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C93F31217437C2B00C561C8 /* ChatViewController.xib */; };
+		9C93F31A1743848500C561C8 /* aqua.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C93F3181743848500C561C8 /* aqua.png */; };
+		9C93F31B1743848500C561C8 /* orange.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C93F3191743848500C561C8 /* orange.png */; };
+		9C93F31C1743868E00C561C8 /* SMMessageViewTableCell.h in Sources */ = {isa = PBXBuildFile; fileRef = 9C93F3161743836500C561C8 /* SMMessageViewTableCell.h */; };
+		9C93F31D1743868E00C561C8 /* SMMessageViewTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C93F3171743836500C561C8 /* SMMessageViewTableCell.m */; };
 		9CB114E61721728E00FA59EE /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CB114E51721728E00FA59EE /* Utils.m */; };
 		9CE6FCAC1718464E00438AEA /* DibsMaibViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CE6FCAA1718464E00438AEA /* DibsMaibViewController.m */; };
 		9CE6FCAD1718464E00438AEA /* DibsMaibViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9CE6FCAB1718464E00438AEA /* DibsMaibViewController.xib */; };
@@ -174,6 +180,13 @@
 		9C321392171EE9E600557240 /* SimpleTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimpleTableCell.xib; sourceTree = "<group>"; };
 		9C321394171EEC1F00557240 /* SimpleTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleTableCell.h; sourceTree = "<group>"; };
 		9C321395171EEC1F00557240 /* SimpleTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleTableCell.m; sourceTree = "<group>"; };
+		9C93F31017437C2B00C561C8 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
+		9C93F31117437C2B00C561C8 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
+		9C93F31217437C2B00C561C8 /* ChatViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatViewController.xib; sourceTree = "<group>"; };
+		9C93F3161743836500C561C8 /* SMMessageViewTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMMessageViewTableCell.h; sourceTree = "<group>"; };
+		9C93F3171743836500C561C8 /* SMMessageViewTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMMessageViewTableCell.m; sourceTree = "<group>"; };
+		9C93F3181743848500C561C8 /* aqua.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aqua.png; sourceTree = "<group>"; };
+		9C93F3191743848500C561C8 /* orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orange.png; sourceTree = "<group>"; };
 		9CB114E41721728D00FA59EE /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		9CB114E51721728E00FA59EE /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		9CE6FCA91718464E00438AEA /* DibsMaibViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DibsMaibViewController.h; sourceTree = "<group>"; };
@@ -538,6 +551,8 @@
 		9CF7B7D317145912007C2D69 /* dibs */ = {
 			isa = PBXGroup;
 			children = (
+				9C93F3161743836500C561C8 /* SMMessageViewTableCell.h */,
+				9C93F3171743836500C561C8 /* SMMessageViewTableCell.m */,
 				9C32137F171D7C1600557240 /* user */,
 				9C32137C171D7B3500557240 /* utils */,
 				9C321371171C1C7700557240 /* Foursquare */,
@@ -567,6 +582,9 @@
 				9C321394171EEC1F00557240 /* SimpleTableCell.h */,
 				9C321395171EEC1F00557240 /* SimpleTableCell.m */,
 				9C321392171EE9E600557240 /* SimpleTableCell.xib */,
+				9C93F31017437C2B00C561C8 /* ChatViewController.h */,
+				9C93F31117437C2B00C561C8 /* ChatViewController.m */,
+				9C93F31217437C2B00C561C8 /* ChatViewController.xib */,
 			);
 			path = dibs;
 			sourceTree = "<group>";
@@ -574,6 +592,8 @@
 		9CF7B7D417145912007C2D69 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9C93F3181743848500C561C8 /* aqua.png */,
+				9C93F3191743848500C561C8 /* orange.png */,
 				9CF7B7D517145912007C2D69 /* Default.png */,
 				9CF7B7D717145912007C2D69 /* Default-Landscape~ipad.png */,
 				9CF7B7D917145912007C2D69 /* fps_images.png */,
@@ -1013,6 +1033,9 @@
 				9C321387171DAAA600557240 /* Default-568h@2x.png in Resources */,
 				9C321391171DB88700557240 /* UserListViewController.xib in Resources */,
 				9C321393171EE9E700557240 /* SimpleTableCell.xib in Resources */,
+				9C93F31417437C2B00C561C8 /* ChatViewController.xib in Resources */,
+				9C93F31A1743848500C561C8 /* aqua.png in Resources */,
+				9C93F31B1743848500C561C8 /* orange.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1023,6 +1046,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C93F31C1743868E00C561C8 /* SMMessageViewTableCell.h in Sources */,
+				9C93F31D1743868E00C561C8 /* SMMessageViewTableCell.m in Sources */,
 				9C321389171DAC1200557240 /* UserData.h in Sources */,
 				9C32138A171DAC1200557240 /* UserData.m in Sources */,
 				9C32138B171DAC1200557240 /* UrlConnectionManager.h in Sources */,
@@ -1141,6 +1166,7 @@
 				9C321390171DB88700557240 /* UserListViewController.m in Sources */,
 				9C321396171EEC2000557240 /* SimpleTableCell.m in Sources */,
 				9CB114E61721728E00FA59EE /* Utils.m in Sources */,
+				9C93F31317437C2B00C561C8 /* ChatViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
