@@ -8,6 +8,7 @@
 
 #import "ChatViewController.h"
 #import "SMMessageViewTableCell.h"
+#import "AppDelegate.h"
 @interface ChatViewController ()
 
 @end
@@ -22,6 +23,8 @@
     if (self) {
         // Custom initialization
     }
+    AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
+    [app connect];
     return self;
 }
 
@@ -29,7 +32,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    messages = [[NSMutableArray alloc] init];
+    //messages = [[NSMutableArray alloc] init];
+    
 }
 
 - (void)didReceiveMemoryWarning

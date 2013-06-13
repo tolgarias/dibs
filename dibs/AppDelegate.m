@@ -16,6 +16,8 @@
 
 @synthesize window=window_, navController=navController_, director=director_,dibsMainViewController_ = dibsMainViewController,userViewController_ = userViewController,userListViewController_ = userListViewController ;
 
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 	// Create the main window
@@ -155,5 +157,9 @@
 
 	[super dealloc];
 }
+
+
+
+
 @end
 

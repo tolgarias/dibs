@@ -34,9 +34,15 @@ typedef enum {
 @property (nonatomic,retain) UserViewController *userViewController_;
 @property (nonatomic,retain) UserListViewController *userListViewController_;
 
+
+
 -(void) showUserView;
 -(void) showUserListView;
 -(void) showLoginView;
 
 -(void) showView:(viewToShow) view;
+-(void) setUpStream;
+-(BOOL) connect;
+-(void) disconnect;
+
 @end
