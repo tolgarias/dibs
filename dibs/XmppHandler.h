@@ -40,11 +40,13 @@
 @property (nonatomic, strong, readonly) XMPPvCardAvatarModule *xmppvCardAvatarModule;
 @property (nonatomic, strong, readonly) XMPPCapabilities *xmppCapabilities;
 @property (nonatomic, strong, readonly) XMPPCapabilitiesCoreDataStorage *xmppCapabilitiesStorage;
-
+@property (nonatomic,assign) id delegate;
+@property (nonatomic,assign) SEL selector;
 
 - (NSManagedObjectContext *)managedObjectContext_roster;
 - (NSManagedObjectContext *)managedObjectContext_capabilities;
 
 - (BOOL)connect;
 - (void)disconnect;
+-(void) sendMessage:(NSString*) to message:(NSString*) msg;
 @end

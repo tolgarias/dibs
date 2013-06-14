@@ -37,7 +37,7 @@
 		9CA7FBA41769FFE200C90B0F /* ContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA7FB9B1769FFE200C90B0F /* ContextFilterLogFormatter.m */; };
 		9CA7FBA51769FFE200C90B0F /* DispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA7FB9D1769FFE200C90B0F /* DispatchQueueLogFormatter.m */; };
 		9CA7FBA61769FFE200C90B0F /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9CA7FB9E1769FFE200C90B0F /* README.txt */; };
-		9CA7FBAB176A002300C90B0F /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA7FBAA176A002300C90B0F /* GCDAsyncSocket.m */; };
+		9CA7FBAB176A002300C90B0F /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA7FBAA176A002300C90B0F /* GCDAsyncSocket.m */; settings = {COMPILER_FLAGS = " -fobjc-arc"; }; };
 		9CA7FBB9176A005000C90B0F /* NSString+DDXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA7FBAF176A005000C90B0F /* NSString+DDXML.m */; };
 		9CA7FBBA176A005000C90B0F /* DDXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA7FBB2176A005000C90B0F /* DDXMLDocument.m */; };
 		9CA7FBBB176A005000C90B0F /* DDXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA7FBB4176A005000C90B0F /* DDXMLElement.m */; };
@@ -62,7 +62,7 @@
 		9CA7FC0C176A00FD00C90B0F /* XMPPPresence.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA7FBED176A00FD00C90B0F /* XMPPPresence.m */; };
 		9CA7FC0D176A00FD00C90B0F /* XMPPStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA7FBEF176A00FD00C90B0F /* XMPPStream.m */; };
 		9CA7FC0E176A00FD00C90B0F /* DDList.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA7FBF2176A00FD00C90B0F /* DDList.m */; };
-		9CA7FC0F176A00FD00C90B0F /* GCDMulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA7FBF4176A00FD00C90B0F /* GCDMulticastDelegate.m */; };
+		9CA7FC0F176A00FD00C90B0F /* GCDMulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA7FBF4176A00FD00C90B0F /* GCDMulticastDelegate.m */; settings = {COMPILER_FLAGS = " -fobjc-arc"; }; };
 		9CA7FC10176A00FD00C90B0F /* LibIDN.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA7FBF6176A00FD00C90B0F /* LibIDN.m */; };
 		9CA7FC11176A00FD00C90B0F /* RFImageToDataTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA7FBF8176A00FD00C90B0F /* RFImageToDataTransformer.m */; };
 		9CA7FC12176A00FD00C90B0F /* XMPPIDTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA7FBFA176A00FD00C90B0F /* XMPPIDTracker.m */; };
@@ -314,7 +314,7 @@
 		9C7159A1176869EB0028B393 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		9C93F31017437C2B00C561C8 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
 		9C93F31117437C2B00C561C8 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
-		9C93F31217437C2B00C561C8 /* ChatViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatViewController.xib; sourceTree = "<group>"; };
+		9C93F31217437C2B00C561C8 /* ChatViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChatViewController.xib; path = /Users/bilal/Documents/ios/dibs/dibs/ChatViewController.xib; sourceTree = "<absolute>"; };
 		9C93F3161743836500C561C8 /* SMMessageViewTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMMessageViewTableCell.h; sourceTree = "<group>"; };
 		9C93F3171743836500C561C8 /* SMMessageViewTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMMessageViewTableCell.m; sourceTree = "<group>"; };
 		9C93F3181743848500C561C8 /* aqua.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aqua.png; sourceTree = "<group>"; };
@@ -2446,7 +2446,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
@@ -2467,6 +2467,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				FOURSQUARE_CALLBACK_URL = "dibs://?";
 				FOURSQUARE_CLIENT_ID = 2XMWXFMOYDSOF2MOFGX3GVC01433NYGS4PRKNH10TSBYUYHJ;
@@ -2498,6 +2499,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
 				FOURSQUARE_CALLBACK_URL = "dibs://?";
 				FOURSQUARE_CLIENT_ID = 2XMWXFMOYDSOF2MOFGX3GVC01433NYGS4PRKNH10TSBYUYHJ;

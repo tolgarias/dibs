@@ -9,6 +9,7 @@
 #import "ChatViewController.h"
 #import "SMMessageViewTableCell.h"
 #import "AppDelegate.h"
+#import "XmppHandler.h"
 @interface ChatViewController ()
 
 @end
@@ -23,11 +24,33 @@
     if (self) {
         // Custom initialization
     }
-    AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-    [app connect];
+    //AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
+    //[app connect];
+    //[[XmppHandler sharedInstance] ];
+    messages = [[NSMutableArray alloc] init];
+    [XmppHandler sharedInstance].delegate=self;
+    [XmppHandler sharedInstance].selector = @selector(messageReceived:);
+    [[XmppHandler sharedInstance] connect];
     return self;
 }
+-(void) messageReceived:(NSString*) msg{
+    NSMutableDictionary *m = [[NSMutableDictionary alloc] init];
+    [m setObject:msg forKey:@"msg"];
+    [m setObject:@"other" forKey:@"sender"];
+    [m setObject:[ChatViewController getCurrentTime] forKey:@"time"];
+    
+    [messages addObject:m];
+    [self.tView reloadData];
+    [m release];
+    
+    NSIndexPath *topIndexPath = [NSIndexPath indexPathForRow:messages.count-1
+												   inSection:0];
+	
+	[self.tView scrollToRowAtIndexPath:topIndexPath
+					  atScrollPosition:UITableViewScrollPositionMiddle
+							  animated:YES];
 
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -186,8 +209,34 @@ static CGFloat padding = 20.0;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    //[textField setHidden:YES];
-    return TRUE;
+    [messageField resignFirstResponder];
+    
+    
+    NSString *messageStr = self.messageField.text;
+	
+    if([messageStr length] > 0) {
+		self.messageField.text = @"";
+        NSMutableDictionary *m = [[NSMutableDictionary alloc] init];
+		[m setObject:messageStr forKey:@"msg"];
+		[m setObject:@"you" forKey:@"sender"];
+		[m setObject:[ChatViewController getCurrentTime] forKey:@"time"];
+		
+		[messages addObject:m];
+		[self.tView reloadData];
+		[m release];
+		[[XmppHandler sharedInstance] sendMessage:@"admin@www.dibstick.com" message:messageStr];
+    }
+	
+	NSIndexPath *topIndexPath = [NSIndexPath indexPathForRow:messages.count-1
+												   inSection:0];
+	
+	[self.tView scrollToRowAtIndexPath:topIndexPath
+					  atScrollPosition:UITableViewScrollPositionMiddle
+							  animated:YES];
+
+    self.messageField.text = @"";
+
+    return NO;
 }
 
 @end
