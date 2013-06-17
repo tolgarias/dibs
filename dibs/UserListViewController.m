@@ -39,7 +39,7 @@
     if(insertLike==YES) {
         like = @"1";
     }
-    NSString *postData = [NSString stringWithFormat:@"accessToken=%@&likeAccessToken=%@&venueId=%@&insertLike=%@",[UserData sharedInstance].accessToken,[UserData sharedInstance].lastCheckInVenue,[[userDataArray objectAtIndex:[selectedIndex intValue]] objectForKey:@"accessToken"],like];
+    NSString *postData = [NSString stringWithFormat:@"accessToken=%@&likeAccessToken=%@&venueId=%@&insertLike=%@",[UserData sharedInstance].accessToken,[[userDataArray objectAtIndex:[selectedIndex intValue]] objectForKey:@"accessToken"],[UserData sharedInstance].lastCheckInVenue,like];
     NSLog(@"postData:%@",postData);
     [UrlConnectionManager sharedInstance].delegate = self;
     [UrlConnectionManager sharedInstance].selector = @selector(onLikeResponse:);

@@ -33,26 +33,26 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "dibs/Foursquare/FoursquareManager.m"
-         timestampString = "393153131.794219"
+         filePath = "dibs/UserListViewController.m"
+         timestampString = "390153154.088156"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "105"
-         endingLineNumber = "105"
-         landmarkName = "-foursquareDidAuthorize:"
+         startingLineNumber = "45"
+         endingLineNumber = "45"
+         landmarkName = "-likeUser:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "dibs/XmppHandler.m"
-         timestampString = "393168929.25351"
+         filePath = "dibs/UrlConnectionManager.m"
+         timestampString = "390153229.690437"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "445"
-         endingLineNumber = "445"
-         landmarkName = "-xmppStream:didNotAuthenticate:"
+         startingLineNumber = "46"
+         endingLineNumber = "46"
+         landmarkName = "-connection:didReceiveData:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
