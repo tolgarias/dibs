@@ -11,8 +11,9 @@
 #import "UserData.h"
 #import "UrlConnectionManager.h"
 #import "Utils.h"
+#import "AppDelegate.h"
 @interface UserListViewController ()
-
+    -(void) likeUser:(BOOL) insertLike;
 @end
 
 @implementation UserListViewController
@@ -33,16 +34,38 @@
     }
     return self;
 }
--(void) likeButtonPressed {
-    NSString *postData = [NSString stringWithFormat:@"accessToken=%@&likeAccessToken=%@&venueId=%@",[UserData sharedInstance].accessToken,[UserData sharedInstance].lastCheckInVenue,[[userDataArray objectAtIndex:[selectedIndex intValue]] objectForKey:@"accessToken"]];
+-(void) likeUser:(BOOL)insertLike{
+    NSString* like = @"0";
+    if(insertLike==YES) {
+        like = @"1";
+    }
+    NSString *postData = [NSString stringWithFormat:@"accessToken=%@&likeAccessToken=%@&venueId=%@&insertLike=%@",[UserData sharedInstance].accessToken,[UserData sharedInstance].lastCheckInVenue,[[userDataArray objectAtIndex:[selectedIndex intValue]] objectForKey:@"accessToken"],like];
     NSLog(@"postData:%@",postData);
     [UrlConnectionManager sharedInstance].delegate = self;
     [UrlConnectionManager sharedInstance].selector = @selector(onLikeResponse:);
     [[UrlConnectionManager sharedInstance] postData:postData withUrl:@"https://www.dibstick.com/dibs_likeuser.php"];
-    
+}
+-(void) likeUserSelector {
+    [self likeUser:NO];
+}
+-(void) likeButtonPressed {
+    [self likeUser:YES];
 }
 -(void) onLikeResponse:(NSDictionary*) jsonData{
-    NSLog(@"%@",jsonData);
+    //NSLog(@"%@",jsonData);
+    //[self ]
+    NSNumber* result = [jsonData objectForKey:@"result"];
+    if([result intValue]==0){
+        [NSTimer scheduledTimerWithTimeInterval:1
+                                         target:self
+                                       selector:@selector(likeUserSelector)
+                                       userInfo:nil
+                                        repeats:NO];
+    }
+    else {
+        AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
+        [app showChatView];
+    }
 }
 - (void)viewDidLoad
 {
@@ -99,7 +122,7 @@
     NSNumber *createdAt =(NSNumber*)[[userDataArray objectAtIndex:indexPath.row] objectForKey:@"lastCheckInDate"];
     NSString *bar = [[Utils sharedInstance] getIntervalString:createdAt];
     
-    cell.nameLabel.text = [[userDataArray objectAtIndex:0] objectForKey:@"name"];
+    cell.nameLabel.text = [[userDataArray objectAtIndex:indexPath.row] objectForKey:@"name"];
     cell.timeLabel.text=bar;
     //cell.thumbnailImageView.image = [UIImage imageNamed:@"Icon.png"];
     UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[[userDataArray objectAtIndex:indexPath.row] objectForKey:@"photo"]]]];

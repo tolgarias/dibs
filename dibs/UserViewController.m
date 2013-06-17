@@ -11,6 +11,7 @@
 #import "UrlConnectionManager.h"
 #import "ScreenManager.h"
 #import "Utils.h"
+#import "XmppHandler.h"
 
 @interface UserViewController ()
 
@@ -94,6 +95,9 @@
     [lblName setText:name];
     [lblVenue setText:[NSString stringWithFormat:@"Last check-in:%@",venueName]];
     [lblDate setText:[NSString stringWithFormat:@"Last check-in date:%@",bar]];
+    
+    [[XmppHandler sharedInstance] connect];
+    
     //NSLog(@"%@",photo);
 }
 

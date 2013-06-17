@@ -61,7 +61,7 @@ static XmppHandler* sharedInstance;
     return sharedInstance;
 }
 -(id) init {
-     [self setupStream];
+        [self setupStream];
         return self;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -262,10 +262,10 @@ static XmppHandler* sharedInstance;
 		return YES;
 	}
     
-	//NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
-    //	NSString *myPassword = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyPassword];
-    NSString *myJID = @"tolga@www.dibstick.com";
-    NSString *myPassword = @"9902010020";
+	NSString *myJID = [NSString stringWithFormat:@"%@@www.dibstick.com",[[NSUserDefaults standardUserDefaults] stringForKey:@"accessToken"]];
+    NSString *myPassword = [[NSUserDefaults standardUserDefaults] stringForKey:@"accessToken"];
+    //NSString *myJID = @"tolga@www.dibstick.com";
+    //NSString *myPassword = @"9902010020";
 	//
 	// If you don't want to use the Settings view to set the JID,
 	// uncomment the section below to hard code a JID and password.
@@ -442,7 +442,7 @@ static XmppHandler* sharedInstance;
 {
 	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
-    
+    [self registerUser:[[NSUserDefaults standardUserDefaults] stringForKey:@"accessToken"]];
     
 }
 
@@ -466,7 +466,7 @@ static XmppHandler* sharedInstance;
 		                                               managedObjectContext:[self managedObjectContext_roster]];
 		
 		NSString *body = [[message elementForName:@"body"] stringValue];
-		NSString *displayName = [user displayName];
+		//NSString *displayName = [user displayName];
         
 		/*if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive)
 		{
@@ -558,6 +558,18 @@ static XmppHandler* sharedInstance;
 	
 }
 
+- (void)xmppStreamDidRegister:(XMPPStream *)sender{
+    
+    NSLog(@"I'm in register method");
+    [self connect];
+}
+
+- (void)xmppStream:(XMPPStream *)sender didNotRegister:(NSXMLElement
+                                                        *)error{
+    NSLog(@"Sorry the registration is failed"); 
+    
+}
+
 -(void) sendMessage:(NSString *)to message:(NSString *)msg {
      NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
     [body setStringValue:msg];
@@ -568,6 +580,18 @@ static XmppHandler* sharedInstance;
     [message addChild:body];
     
     [self.xmppStream sendElement:message];
+}
+-(void) registerUser:(NSString *)username {
+    NSString* fullUsername =  [NSString stringWithFormat:@"%@@%@",username,@"www.dibstick.com"];
+    xmppStream.myJID = [XMPPJID jidWithString:fullUsername];
+    
+    NSError *error = nil;
+    if (![xmppStream registerWithPassword:username error:&error])
+    {
+        NSLog(@"Oops, I forgot something: %@", error);
+    }
+    
+
 }
 
 @end

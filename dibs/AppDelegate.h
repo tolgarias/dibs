@@ -19,6 +19,7 @@ typedef enum {
     kMainView = 3
     } viewToShow;
 
+
 @interface AppController : NSObject <UIApplicationDelegate, CCDirectorDelegate>
 {
 	UIWindow *window_;
@@ -39,10 +40,7 @@ typedef enum {
 -(void) showUserView;
 -(void) showUserListView;
 -(void) showLoginView;
-
+-(void) showChatView;
 -(void) showView:(viewToShow) view;
--(void) setUpStream;
--(BOOL) connect;
--(void) disconnect;
 
 @end

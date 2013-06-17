@@ -108,7 +108,7 @@ static FoursquareManager* sharedInstance;
     
     AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
     [app showUserView];
-    
+    //[[XmppHandler sharedInstance] connect];
    // NSLog(@"login oldu");
 }
 

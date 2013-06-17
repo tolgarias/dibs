@@ -49,4 +49,5 @@
 - (BOOL)connect;
 - (void)disconnect;
 -(void) sendMessage:(NSString*) to message:(NSString*) msg;
+-(void) registerUser:(NSString*) username;
 @end
