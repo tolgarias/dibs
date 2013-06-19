@@ -16,7 +16,7 @@
 
 
 @implementation ChatViewController
-@synthesize tView,messageField,messages;
+@synthesize tView,messageField,messages,displayName,chatWith,pictureUrl;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -24,13 +24,27 @@
     if (self) {
         // Custom initialization
     }
-    //AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-    //[app connect];
-    //[[XmppHandler sharedInstance] ];
     messages = [[NSMutableArray alloc] init];
     [XmppHandler sharedInstance].delegate=self;
     [XmppHandler sharedInstance].selector = @selector(messageReceived:);
     [[XmppHandler sharedInstance] connect];
+    return self;
+}
+
+-(id) initWithNibNameAndInfo:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil name:(NSString *)name picture:(NSString *)picture accessToken:(NSString *)accessToken {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    messages = [[NSMutableArray alloc] init];
+    [XmppHandler sharedInstance].delegate=self;
+    [XmppHandler sharedInstance].selector = @selector(messageReceived:);
+    [[XmppHandler sharedInstance] connect];
+    
+    pictureUrl = picture;
+    chatWith = accessToken;
+    displayName = name;
+    
     return self;
 }
 -(void) messageReceived:(NSString*) msg{
@@ -54,8 +68,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    //messages = [[NSMutableArray alloc] init];
+    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:pictureUrl]]];
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc]
+                                  //initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                  initWithImage:image style:UIBarButtonItemStylePlain
+                                  target:self
+                                  action:@selector(onProfileButtonPressed)];
+    [[self navigationItem] setRightBarButtonItem:barButton];
+    [[self navigationItem] setTitle:displayName];
+}
+
+-(void) onProfileButtonPressed{
     
 }
 
@@ -224,7 +247,7 @@ static CGFloat padding = 20.0;
 		[messages addObject:m];
 		[self.tView reloadData];
 		[m release];
-		[[XmppHandler sharedInstance] sendMessage:@"admin@www.dibstick.com" message:messageStr];
+		[[XmppHandler sharedInstance] sendMessage:chatWith message:messageStr];
     }
 	
 	NSIndexPath *topIndexPath = [NSIndexPath indexPathForRow:messages.count-1

@@ -46,6 +46,7 @@
     [FoursquareManager sharedInstance].selector = @selector(onUserDataReceived:);
     [[FoursquareManager sharedInstance] getUserData];
     [[self navigationItem] setTitle:@"Play Dibs"];
+    
 }
 -(void) logoutButtonPressed {
     [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"accessToken"];
@@ -60,12 +61,15 @@
 
 - (void) onUserDataReceived:(NSObject*) data {
     NSDictionary* responseData = [FoursquareManager sharedInstance].response;
+    
+    NSLog(@"%@",responseData);
     NSString *photo = [[responseData objectForKey:@"user"] objectForKey:@"photo"];
     NSString *firstName = [[responseData objectForKey:@"user"] objectForKey:@"firstName"];
     NSString *lastName = [[responseData objectForKey:@"user"] objectForKey:@"lastName"];
     NSDictionary *checkIns = [[responseData objectForKey:@"user"] objectForKey:@"checkins"];
     NSDictionary *venue = [[[checkIns objectForKey:@"items"] objectAtIndex:0] objectForKey:@"venue"];
     
+    NSDictionary* venueLocation = [venue objectForKey:@"location"];
     NSString *venueName = [venue objectForKey:@"name"];
     NSString *venueId = [venue objectForKey:@"id"];
     NSNumber *createdAt =[[[checkIns objectForKey:@"items"] objectAtIndex:0] objectForKey:@"createdAt"];
@@ -83,7 +87,7 @@
         [UserData sharedInstance].photoUrl = photo;
         [UrlConnectionManager sharedInstance].delegate = self;
         [UrlConnectionManager sharedInstance].selector = @selector(onUserDataSend:);
-        NSString* postData = [NSString stringWithFormat:@"&accessToken=%@&name=%@&photo=%@&lastCheckInDate=%@&lastCheckInValue=%@",accessToken,name,photo,[NSString stringWithFormat:@"%i",[createdAt intValue]],venueId];
+        NSString* postData = [NSString stringWithFormat:@"&accessToken=%@&name=%@&photo=%@&lastCheckInDate=%@&lastCheckInValue=%@&venueName=%@&lat=%@&lng=%@",accessToken,name,photo,[NSString stringWithFormat:@"%i",[createdAt intValue]],venueId,venueName,[venueLocation objectForKey:@"lat"],[venueLocation objectForKey:@"lng"]];
         NSLog(@"%@",postData);
         [[UrlConnectionManager sharedInstance] postData:postData withUrl:@"https://www.dibstick.com/dibs_user.php"];
         //NSDictionary *params = [[NSDictionary alloc] initWithObjects:<#(NSArray *)#> forKeys:<#(NSArray *)#>]

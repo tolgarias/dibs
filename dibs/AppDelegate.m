@@ -128,8 +128,10 @@
     [viewController release];
 }
 
--(void) showChatView {
-    ChatViewController *viewController = [[ChatViewController alloc] initWithNibName:@"ChatViewController" bundle:[NSBundle mainBundle]];
+-(void) showChatView:(NSString*) accessToken name:(NSString *)displayName picture:(NSString *)pictureUrl{
+    //ChatViewController *viewController = [[ChatViewController alloc] initWithNibName:@"ChatViewController" bundle:[NSBundle mainBundle]];
+    
+    ChatViewController *viewController = [[ChatViewController alloc] initWithNibNameAndInfo:@"ChatViewController" bundle:[NSBundle mainBundle] name:displayName picture:pictureUrl accessToken:accessToken];
     [navController_ pushViewController:viewController animated:YES];
     [viewController release];
 }

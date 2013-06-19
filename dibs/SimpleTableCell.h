@@ -13,6 +13,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *nameLabel;
 @property (nonatomic, retain) IBOutlet UILabel *timeLabel;
 @property (nonatomic, retain) IBOutlet UIImageView *thumbnailImageView;
+@property (nonatomic, retain) IBOutlet UIImageView *likedImageView;
 
 
 @end

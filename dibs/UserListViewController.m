@@ -14,11 +14,13 @@
 #import "AppDelegate.h"
 @interface UserListViewController ()
     -(void) likeUser:(BOOL) insertLike;
+    
 @end
 
 @implementation UserListViewController
 
-@synthesize users=users_,userList,userTableView,userDataArray,selectedIndex;
+@synthesize users=users_,userList,userTableView,userDataArray,selectedIndex,likes;
+@synthesize activityView,indx;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,8 +31,10 @@
         userDataArray = [[NSMutableArray alloc] init];
         
             UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonItemStylePlain target:self action:@selector(likeButtonPressed)];
+        [barButton setTitle:@"Like"];
             [[self navigationItem] setRightBarButtonItem:barButton];
-        
+        //activityView =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        likes = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -40,10 +44,16 @@
         like = @"1";
     }
     NSString *postData = [NSString stringWithFormat:@"accessToken=%@&likeAccessToken=%@&venueId=%@&insertLike=%@",[UserData sharedInstance].accessToken,[[userDataArray objectAtIndex:[selectedIndex intValue]] objectForKey:@"accessToken"],[UserData sharedInstance].lastCheckInVenue,like];
-    NSLog(@"postData:%@",postData);
+    //NSLog(@"postData:%@",postData);
     [UrlConnectionManager sharedInstance].delegate = self;
     [UrlConnectionManager sharedInstance].selector = @selector(onLikeResponse:);
     [[UrlConnectionManager sharedInstance] postData:postData withUrl:@"https://www.dibstick.com/dibs_likeuser.php"];
+    
+    [likes setObject:@"1" forKey:selectedIndex];
+    //[self.userTableView beginUpdates];
+    //[self.userTableView reloadRowsAtIndexPaths:@[indx] withRowAnimation:UITableViewRowAnimationNone];
+    //[self.userTableView endUpdates];
+    [self.userTableView reloadData];
 }
 -(void) likeUserSelector {
     [self likeUser:NO];
@@ -51,6 +61,7 @@
 -(void) likeButtonPressed {
     [self likeUser:YES];
 }
+bool activityIsLoaded = NO;
 -(void) onLikeResponse:(NSDictionary*) jsonData{
     //NSLog(@"%@",jsonData);
     //[self ]
@@ -61,10 +72,20 @@
                                        selector:@selector(likeUserSelector)
                                        userInfo:nil
                                         repeats:NO];
+        /*if(activityIsLoaded==NO){
+            activityView.center = self.view.center;
+            //[self.view addSubview:activityView];
+            [activityView startAnimating];
+            [activityView setHidden:NO];
+            activityIsLoaded = YES;
+        }*/
     }
     else {
+        NSString* accessToken = [[userDataArray objectAtIndex:[selectedIndex intValue]] objectForKey:@"accessToken"];
+        NSString* displayName = [[userDataArray objectAtIndex:[selectedIndex intValue]] objectForKey:@"name"];
+        NSString* photo = [[userDataArray objectAtIndex:[selectedIndex intValue]] objectForKey:@"photo"];
         AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-        [app showChatView];
+        [app showChatView:accessToken name:displayName picture:photo];
     }
 }
 - (void)viewDidLoad
@@ -80,7 +101,7 @@
     [[UrlConnectionManager sharedInstance] postData:postData withUrl:@"https://www.dibstick.com/dibs_userlist.php"];
 }
 -(void) onUserListReceived:(NSDictionary*) jsonData {
-    NSLog(@"%@",jsonData);
+    //NSLog(@"%@",jsonData);
     users_ = (NSArray*)[jsonData objectForKey:@"userList"];
     for (NSDictionary* dic in users_) {
         //NSLog(@"name:%@",[dic objectForKey:@"name"]);
@@ -97,14 +118,15 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //NSLog(@"%@",users);
+    NSLog(@"%@",userDataArray);
 
-    return [users_ count];
+    return [userDataArray count];
     //return 0;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     selectedIndex = [NSNumber numberWithInt:indexPath.row];
-    NSLog(@"selected row:%i",indexPath.row);
+    indx = indexPath;
+    //NSLog(@"selected row:%i",indexPath.row);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -127,7 +149,9 @@
     //cell.thumbnailImageView.image = [UIImage imageNamed:@"Icon.png"];
     UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[[userDataArray objectAtIndex:indexPath.row] objectForKey:@"photo"]]]];
     cell.thumbnailImageView.image = image;
-    
+    if([likes objectForKey:[NSNumber numberWithInt:indexPath.row]]!=nil){
+        cell.likedImageView.image = [UIImage imageNamed:@"like.png"];
+    }
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

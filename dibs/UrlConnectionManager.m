@@ -47,7 +47,9 @@ static UrlConnectionManager* sharedInstance;
     NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error: &e];
     if(jsonData) {
         //NSNumber* dataType = [jsonData objectForKey:@"dataType"];
-        [m_delegate performSelector:m_selector withObject:jsonData];
+        if(m_delegate!=nil && m_selector!=nil){
+            [m_delegate performSelector:m_selector withObject:jsonData];
+        }
         
     }
 }

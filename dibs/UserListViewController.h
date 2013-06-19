@@ -17,4 +17,7 @@
 @property (nonatomic,retain) IBOutlet UITableView *userTableView;
 @property (nonatomic,retain) NSMutableArray* userDataArray;
 @property (nonatomic,retain) NSNumber *selectedIndex;
+@property (nonatomic,retain) IBOutlet UIActivityIndicatorView *activityView;
+@property (nonatomic,retain) NSMutableDictionary *likes;
+@property (nonatomic,retain) NSIndexPath *indx;
 @end

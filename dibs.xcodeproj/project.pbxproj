@@ -158,6 +158,7 @@
 		9CDFD66917670DFB00B9E28A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CDFD66817670DFB00B9E28A /* Security.framework */; };
 		9CE6FCAC1718464E00438AEA /* DibsMaibViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CE6FCAA1718464E00438AEA /* DibsMaibViewController.m */; };
 		9CE6FCAD1718464E00438AEA /* DibsMaibViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9CE6FCAB1718464E00438AEA /* DibsMaibViewController.xib */; };
+		9CE7270E1771E66300F59E79 /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CE7270D1771E66300F59E79 /* like.png */; };
 		9CF7B7C217145912007C2D69 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CF7B7C117145912007C2D69 /* QuartzCore.framework */; };
 		9CF7B7C417145912007C2D69 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CF7B7C317145912007C2D69 /* OpenGLES.framework */; };
 		9CF7B7C617145912007C2D69 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CF7B7C517145912007C2D69 /* OpenAL.framework */; };
@@ -582,6 +583,7 @@
 		9CE6FCA91718464E00438AEA /* DibsMaibViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DibsMaibViewController.h; sourceTree = "<group>"; };
 		9CE6FCAA1718464E00438AEA /* DibsMaibViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DibsMaibViewController.m; sourceTree = "<group>"; };
 		9CE6FCAB1718464E00438AEA /* DibsMaibViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DibsMaibViewController.xib; sourceTree = "<group>"; };
+		9CE7270D1771E66300F59E79 /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like.png; sourceTree = "<group>"; };
 		9CF7B7BD17145912007C2D69 /* dibs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dibs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CF7B7C117145912007C2D69 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		9CF7B7C317145912007C2D69 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -1715,6 +1717,7 @@
 		9CF7B7D417145912007C2D69 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9CE7270D1771E66300F59E79 /* like.png */,
 				9C93F3181743848500C561C8 /* aqua.png */,
 				9C93F3191743848500C561C8 /* orange.png */,
 				9CF7B7D517145912007C2D69 /* Default.png */,
@@ -2160,6 +2163,7 @@
 				9C93F31A1743848500C561C8 /* aqua.png in Resources */,
 				9C93F31B1743848500C561C8 /* orange.png in Resources */,
 				9CA7FBA61769FFE200C90B0F /* README.txt in Resources */,
+				9CE7270E1771E66300F59E79 /* like.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

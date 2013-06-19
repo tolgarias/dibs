@@ -33,26 +33,52 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "dibs/UserListViewController.m"
-         timestampString = "390153154.088156"
+         filePath = "dibs/Foursquare/FoursquareManager.m"
+         timestampString = "393153131.794219"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "45"
-         endingLineNumber = "45"
-         landmarkName = "-likeUser:"
+         startingLineNumber = "105"
+         endingLineNumber = "105"
+         landmarkName = "-foursquareDidAuthorize:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "dibs/UrlConnectionManager.m"
-         timestampString = "390153229.690437"
+         filePath = "dibs/XmppHandler.m"
+         timestampString = "393168929.25351"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "46"
-         endingLineNumber = "46"
-         landmarkName = "-connection:didReceiveData:"
+         startingLineNumber = "445"
+         endingLineNumber = "445"
+         landmarkName = "-xmppStream:didNotAuthenticate:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "dibs/UserViewController.m"
+         timestampString = "393346958.817619"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "83"
+         endingLineNumber = "83"
+         landmarkName = "-onUserDataReceived:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "dibs/UserViewController.m"
+         timestampString = "393346986.767232"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "65"
+         endingLineNumber = "65"
+         landmarkName = "-onUserDataReceived:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

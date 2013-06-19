@@ -13,6 +13,7 @@
 @synthesize nameLabel = _nameLabel;
 @synthesize timeLabel = timeLabel;
 @synthesize thumbnailImageView = _thumbnailImageView;
+@synthesize likedImageView = _likedImageView;
 
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier

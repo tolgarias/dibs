@@ -37,48 +37,17 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
-					<object class="IBUIButton" id="588245116">
-						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{112, 326}, {73, 44}}</string>
-						<reference key="NSSuperview" ref="191373211"/>
-						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<bool key="IBUIOpaque">NO</bool>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<int key="IBUIContentHorizontalAlignment">0</int>
-						<int key="IBUIContentVerticalAlignment">0</int>
-						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">Send</string>
-						<object class="NSColor" key="IBUIHighlightedTitleColor" id="826185930">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MQA</bytes>
-						</object>
-						<object class="NSColor" key="IBUINormalTitleColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
-						</object>
-						<object class="NSColor" key="IBUINormalTitleShadowColor">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MC41AA</bytes>
-						</object>
-						<object class="IBUIFontDescription" key="IBUIFontDescription">
-							<int key="type">2</int>
-							<double key="pointSize">15</double>
-						</object>
-						<object class="NSFont" key="IBUIFont">
-							<string key="NSName">Helvetica-Bold</string>
-							<double key="NSSize">15</double>
-							<int key="NSfFlags">16</int>
-						</object>
-					</object>
 					<object class="IBUITableView" id="824507121">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{-1, 0}, {321, 228}}</string>
+						<string key="NSFrameSize">{321, 373}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSNextKeyView" ref="678981060"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<reference key="IBUIBackgroundColor" ref="826185930"/>
+						<object class="NSColor" key="IBUIBackgroundColor" id="826185930">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MQA</bytes>
+						</object>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<bool key="IBUIAlwaysBounceVertical">YES</bool>
@@ -92,7 +61,7 @@
 					<object class="IBUITextField" id="678981060">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{13, 282}, {261, 30}}</string>
+						<string key="NSFrame">{{0, 394}, {222, 30}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSNextKeyView" ref="588245116"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -122,6 +91,38 @@
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Helvetica</string>
 							<double key="NSSize">14</double>
+							<int key="NSfFlags">16</int>
+						</object>
+					</object>
+					<object class="IBUIButton" id="588245116">
+						<reference key="NSNextResponder" ref="191373211"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{239, 390}, {73, 38}}</string>
+						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSNextKeyView"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUIContentHorizontalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">0</int>
+						<int key="IBUIButtonType">1</int>
+						<string key="IBUINormalTitle">Send</string>
+						<reference key="IBUIHighlightedTitleColor" ref="826185930"/>
+						<object class="NSColor" key="IBUINormalTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+						</object>
+						<object class="NSColor" key="IBUINormalTitleShadowColor">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MC41AA</bytes>
+						</object>
+						<object class="IBUIFontDescription" key="IBUIFontDescription">
+							<int key="type">2</int>
+							<double key="pointSize">15</double>
+						</object>
+						<object class="NSFont" key="IBUIFont">
+							<string key="NSName">Helvetica-Bold</string>
+							<double key="NSSize">15</double>
 							<int key="NSfFlags">16</int>
 						</object>
 					</object>
@@ -230,8 +231,8 @@
 						<int key="objectID">1</int>
 						<reference key="object" ref="191373211"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="824507121"/>
 							<reference ref="678981060"/>
+							<reference ref="824507121"/>
 							<reference ref="588245116"/>
 						</array>
 						<reference key="parent" ref="0"/>
@@ -248,11 +249,6 @@
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">9</int>
-						<reference key="object" ref="588245116"/>
-						<reference key="parent" ref="191373211"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">15</int>
 						<reference key="object" ref="824507121"/>
 						<reference key="parent" ref="191373211"/>
@@ -260,6 +256,11 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">28</int>
 						<reference key="object" ref="678981060"/>
+						<reference key="parent" ref="191373211"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">9</int>
+						<reference key="object" ref="588245116"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</array>
@@ -279,7 +280,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">31</int>
+			<int key="maxID">32</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
