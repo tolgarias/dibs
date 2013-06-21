@@ -99,10 +99,10 @@
     [lblName setText:name];
     [lblVenue setText:[NSString stringWithFormat:@"Last check-in:%@",venueName]];
     [lblDate setText:[NSString stringWithFormat:@"Last check-in date:%@",bar]];
-    
+    [XmppHandler sharedInstance].displayName = name;
+    [XmppHandler sharedInstance].photo = UIImagePNGRepresentation(image);;
     [[XmppHandler sharedInstance] connect];
     
-    //NSLog(@"%@",photo);
 }
 
 -(void) onUserDataSend:(NSData*) data {

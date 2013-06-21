@@ -19,6 +19,7 @@
 
 #import "DDLog.h"
 #import "DDTTYLogger.h"
+#import "XMPPvCardTemp.h"
 
 #import <CFNetwork/CFNetwork.h>
 // Log levels: off, error, warn, info, verbose
@@ -50,6 +51,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 @synthesize xmppCapabilitiesStorage;
 @synthesize delegate;
 @synthesize selector;
+
+@synthesize displayName;
+@synthesize photo;
 
 
 static XmppHandler* sharedInstance;
@@ -425,7 +429,7 @@ static XmppHandler* sharedInstance;
 	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 	
 	[self goOnline];
-    
+    [self updateVCard:displayName photo:photo];
    // NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
     //[body setStringValue:@"deneme"];
     
@@ -461,14 +465,15 @@ static XmppHandler* sharedInstance;
     
 	if ([message isChatMessageWithBody])
 	{
-		XMPPUserCoreDataStorageObject *user = [xmppRosterStorage userForJID:[message from]
+        //[[self xmppRoster] acceptPresenceSubscriptionRequestFrom:[message from] andAddToRoster:YES];
+		XMPPUserCoreDataStorageObject *user = [xmppRosterStorage userForJID:[XMPPJID jidWithString:@"admin@www.dibstick.com"]
 		                                                         xmppStream:xmppStream
-		                                               managedObjectContext:[self managedObjectContext_roster]];
-		
+		                                                managedObjectContext:[self managedObjectContext_roster]];
+		NSString *from = [message fromStr];
 		NSString *body = [[message elementForName:@"body"] stringValue];
-		//NSString *displayName = [user displayName];
-        
-		/*if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive)
+		NSString *displayName = [user displayName];
+        //[user photo];
+		if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive)
 		{
 			UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:displayName
                                                                 message:body
@@ -485,7 +490,7 @@ static XmppHandler* sharedInstance;
 			localNotification.alertBody = [NSString stringWithFormat:@"From: %@\n\n%@",displayName,body];
             
 			[[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
-		}*/
+		}
         [delegate performSelector:selector withObject:body];
 
 	}
@@ -591,7 +596,35 @@ static XmppHandler* sharedInstance;
         NSLog(@"Oops, I forgot something: %@", error);
     }
     
+}
+-(void) updateVCard:(NSString *)display photo:(NSData *)ph {
+    //dispatch_queue_t queue = dispatch_queue_create("queue", DISPATCH_QUEUE_PRIORITY_DEFAULT);
+    //dispatch_async(queue, ^{
+        XMPPvCardTemp *test = [[xmppvCardTempModule myvCardTemp] copy];
+        [test setName:display];
+        [test setPhoto:ph];
+        [xmppvCardTempModule updateMyvCardTemp:test];
+   // });
+}
+
+-(XMPPUserCoreDataStorageObject*) getUser:(NSString *)username {
+    NSString* usr = [NSString stringWithFormat:@"%@@www.dibstick.com",username];
+    XMPPUserCoreDataStorageObject *user = [xmppRosterStorage userForJID:[XMPPJID jidWithString:usr]
+                                                             xmppStream:xmppStream
+                                                   managedObjectContext:[self managedObjectContext_roster]];
+    return user;
 
 }
+
+-(XMPPvCardTemp*) getVCard:(NSString *)username {
+    NSString* usr = [NSString stringWithFormat:@"%@@www.dibstick.com",username];
+    XMPPvCardTemp *vCard = [xmppvCardTempModule fetchvCardTempForJID:[XMPPJID jidWithString:usr]];
+    XMPPvCardTemp *vCardTemp = [[delegate xmppvCardTempModule]
+                                fetchvCardTempForJID: [XMPPJID jidWithString: @"fr...@mydomain.fr"]
+                                xmppStream:[delegate xmppStream] useCache:YES];
+    return vCard;
+}
+
+
 
 @end

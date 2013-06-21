@@ -120,6 +120,7 @@
     UserViewController *viewController = [[UserViewController alloc] initWithNibName:@"UserViewController" bundle:[NSBundle mainBundle]];
     [navController_ pushViewController:viewController animated:YES];
     [viewController release];
+    [navController_ visibleViewController];
 }
 
 -(void) showUserListView {

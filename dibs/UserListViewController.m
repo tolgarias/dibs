@@ -12,6 +12,7 @@
 #import "UrlConnectionManager.h"
 #import "Utils.h"
 #import "AppDelegate.h"
+#import "XmppHandler.h"
 @interface UserListViewController ()
     -(void) likeUser:(BOOL) insertLike;
     
@@ -67,12 +68,12 @@ bool activityIsLoaded = NO;
     //[self ]
     NSNumber* result = [jsonData objectForKey:@"result"];
     if([result intValue]==0){
-        [NSTimer scheduledTimerWithTimeInterval:1
+        /*[NSTimer scheduledTimerWithTimeInterval:1
                                          target:self
                                        selector:@selector(likeUserSelector)
                                        userInfo:nil
                                         repeats:NO];
-        /*if(activityIsLoaded==NO){
+        if(activityIsLoaded==NO){
             activityView.center = self.view.center;
             //[self.view addSubview:activityView];
             [activityView startAnimating];
@@ -147,7 +148,8 @@ bool activityIsLoaded = NO;
     cell.nameLabel.text = [[userDataArray objectAtIndex:indexPath.row] objectForKey:@"name"];
     cell.timeLabel.text=bar;
     //cell.thumbnailImageView.image = [UIImage imageNamed:@"Icon.png"];
-    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[[userDataArray objectAtIndex:indexPath.row] objectForKey:@"photo"]]]];
+    //UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[[userDataArray objectAtIndex:indexPath.row] objectForKey:@"photo"]]]];
+    UIImage *image = [[[XmppHandler sharedInstance] getUser:[[userDataArray objectAtIndex:indexPath.row] objectForKey:@"accessToken"]] photo];
     cell.thumbnailImageView.image = image;
     if([likes objectForKey:[NSNumber numberWithInt:indexPath.row]]!=nil){
         cell.likedImageView.image = [UIImage imageNamed:@"like.png"];
