@@ -137,6 +137,19 @@
     [viewController release];
 }
 
+
+-(BOOL) showChatView:(NSString *)msg accessToken:(NSString *)accessToken {
+    if([[navController_ visibleViewController] isKindOfClass:[ChatViewController class]]){
+        return YES;
+    }
+    else {
+       ChatViewController *viewController = [[ChatViewController alloc] initWithNibNameAndMessage:@"ChatViewController" bundle:[NSBundle mainBundle] message:msg accessToken:accessToken];
+        [navController_ pushViewController:viewController animated:YES];
+        [viewController release];
+        return NO;
+    }
+}
+
 -(void) showLoginView {
     DibsMaibViewController *viewController = [[DibsMaibViewController alloc] initWithNibName:@"DibsMaibViewController" bundle:[NSBundle mainBundle]];
     [navController_ pushViewController:viewController animated:YES];

@@ -41,6 +41,7 @@ typedef enum {
 -(void) showUserListView;
 -(void) showLoginView;
 -(void) showChatView:(NSString*) accessToken name:(NSString*) displayName picture:(NSString*) pictureUrl;
+-(BOOL) showChatView:(NSString*) msg accessToken:(NSString*) accessToken;
 -(void) showView:(viewToShow) view;
 
 @end

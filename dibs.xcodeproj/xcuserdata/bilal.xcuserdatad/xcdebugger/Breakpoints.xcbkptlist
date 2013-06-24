@@ -33,25 +33,12 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "dibs/Foursquare/FoursquareManager.m"
-         timestampString = "393153131.794219"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "105"
-         endingLineNumber = "105"
-         landmarkName = "-foursquareDidAuthorize:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "dibs/XmppHandler.m"
-         timestampString = "393429366.114802"
+         timestampString = "393779155.866379"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "449"
-         endingLineNumber = "449"
+         startingLineNumber = "441"
+         endingLineNumber = "441"
          landmarkName = "-xmppStream:didNotAuthenticate:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -73,38 +60,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "dibs/XmppHandler.m"
-         timestampString = "393495206.274724"
+         timestampString = "393780882.746308"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "612"
-         endingLineNumber = "612"
-         landmarkName = "-getUser:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "dibs/XmppHandler.m"
-         timestampString = "393495337.159745"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "469"
-         endingLineNumber = "469"
+         startingLineNumber = "466"
+         endingLineNumber = "466"
          landmarkName = "-xmppStream:didReceiveMessage:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "dibs/UserListViewController.m"
-         timestampString = "393495538.197246"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "152"
-         endingLineNumber = "152"
-         landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

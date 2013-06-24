@@ -149,7 +149,11 @@ bool activityIsLoaded = NO;
     cell.timeLabel.text=bar;
     //cell.thumbnailImageView.image = [UIImage imageNamed:@"Icon.png"];
     //UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[[userDataArray objectAtIndex:indexPath.row] objectForKey:@"photo"]]]];
-    UIImage *image = [[[XmppHandler sharedInstance] getUser:[[userDataArray objectAtIndex:indexPath.row] objectForKey:@"accessToken"]] photo];
+    NSString *act = [[userDataArray objectAtIndex:indexPath.row] objectForKey:@"accessToken"];
+    //NSData *imageData = [[[XmppHandler sharedInstance] getVCard:act] photo];
+    XMPPvCardTemp *vCard = [[XmppHandler sharedInstance] getVCard:act];
+    UIImage *image  = [UIImage imageWithData:[vCard photo]];
+    
     cell.thumbnailImageView.image = image;
     if([likes objectForKey:[NSNumber numberWithInt:indexPath.row]]!=nil){
         cell.likedImageView.image = [UIImage imageNamed:@"like.png"];

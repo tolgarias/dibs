@@ -15,8 +15,10 @@
 @end
 
 
-@implementation ChatViewController
-@synthesize tView,messageField,messages,displayName,chatWith,pictureUrl;
+@implementation ChatViewController {
+    NSString *receiver;
+}
+@synthesize tView,messageField,messages,displayName,chatWith,pictureUrl,vCard,chatter;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,12 +41,32 @@
     messages = [[NSMutableArray alloc] init];
     [XmppHandler sharedInstance].delegate=self;
     [XmppHandler sharedInstance].selector = @selector(messageReceived:);
-    [[XmppHandler sharedInstance] connect];
+    //[[XmppHandler sharedInstance] connect];
     
-    pictureUrl = picture;
+    //pictureUrl = picture;
     chatWith = accessToken;
-    displayName = name;
-    
+    //displayName = name;
+    vCard = [[XmppHandler sharedInstance] getVCard:accessToken];
+    return self;
+}
+
+
+-(id) initWithNibNameAndMessage:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil message:(NSString *)msg accessToken:(NSString *)acs{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    messages = [[NSMutableArray alloc] init];
+    [XmppHandler sharedInstance].delegate=self;
+    [XmppHandler sharedInstance].selector = @selector(messageReceived:);
+    [XmppHandler sharedInstance].chatWith = [NSString stringWithFormat:@"%@@www.dibstick.com",acs];
+    //chatWith =acs;
+    //receiver = acs;
+    ///NSLog(@"chatWith:%@",receiver);
+    vCard  = [[XmppHandler sharedInstance] getVCard:acs];
+    if(msg!=nil){
+        [self messageReceived:msg];
+    }
     return self;
 }
 -(void) messageReceived:(NSString*) msg{
@@ -68,14 +90,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:pictureUrl]]];
+    UIImage *image = [UIImage imageWithData:[vCard photo]];
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc]
                                   //initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                   initWithImage:image style:UIBarButtonItemStylePlain
                                   target:self
                                   action:@selector(onProfileButtonPressed)];
     [[self navigationItem] setRightBarButtonItem:barButton];
-    [[self navigationItem] setTitle:displayName];
+    [[self navigationItem] setTitle:[vCard nickname]];
 }
 
 -(void) onProfileButtonPressed{
@@ -102,12 +124,13 @@
 
 
 - (IBAction) sendMessage:(id)sender{
-	
+	receiver = [NSString stringWithFormat:@"%@@www.dibstick.com",chatWith];
+    NSLog(@"ChatWith:%@",receiver);
     NSString *messageStr = self.messageField.text;
 	
     if([messageStr length] > 0) {
 		self.messageField.text = @"";
-         NSMutableDictionary *m = [[NSMutableDictionary alloc] init];
+        NSMutableDictionary *m = [[NSMutableDictionary alloc] init];
 		[m setObject:messageStr forKey:@"msg"];
 		[m setObject:@"you" forKey:@"sender"];
 		[m setObject:[ChatViewController getCurrentTime] forKey:@"time"];
@@ -115,7 +138,7 @@
 		[messages addObject:m];
 		[self.tView reloadData];
 		[m release];
-		
+		[[XmppHandler sharedInstance] sendMessage:messageStr];
     }
 	
 	NSIndexPath *topIndexPath = [NSIndexPath indexPathForRow:messages.count-1
@@ -124,6 +147,8 @@
 	[self.tView scrollToRowAtIndexPath:topIndexPath
 					  atScrollPosition:UITableViewScrollPositionMiddle
 							  animated:YES];
+    
+    self.messageField.text = @"";
 }
 
 
@@ -234,31 +259,7 @@ static CGFloat padding = 20.0;
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [messageField resignFirstResponder];
     
-    
-    NSString *messageStr = self.messageField.text;
-	
-    if([messageStr length] > 0) {
-		self.messageField.text = @"";
-        NSMutableDictionary *m = [[NSMutableDictionary alloc] init];
-		[m setObject:messageStr forKey:@"msg"];
-		[m setObject:@"you" forKey:@"sender"];
-		[m setObject:[ChatViewController getCurrentTime] forKey:@"time"];
-		
-		[messages addObject:m];
-		[self.tView reloadData];
-		[m release];
-		[[XmppHandler sharedInstance] sendMessage:chatWith message:messageStr];
-    }
-	
-	NSIndexPath *topIndexPath = [NSIndexPath indexPathForRow:messages.count-1
-												   inSection:0];
-	
-	[self.tView scrollToRowAtIndexPath:topIndexPath
-					  atScrollPosition:UITableViewScrollPositionMiddle
-							  animated:YES];
-
-    self.messageField.text = @"";
-
+   
     return NO;
 }
 

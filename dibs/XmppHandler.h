@@ -44,13 +44,14 @@
 @property (nonatomic,strong) NSData* photo;
 @property (nonatomic,assign) id delegate;
 @property (nonatomic,assign) SEL selector;
+@property (nonatomic,strong) NSString* chatWith;
 
 - (NSManagedObjectContext *)managedObjectContext_roster;
 - (NSManagedObjectContext *)managedObjectContext_capabilities;
 
 - (BOOL)connect;
 - (void)disconnect;
--(void) sendMessage:(NSString*) to message:(NSString*) msg;
+-(void) sendMessage:(NSString*) msg;
 -(void) registerUser:(NSString*) username;
 -(void) updateVCard:(NSString*) display photo:(NSData*) ph;
 -(XMPPUserCoreDataStorageObject*) getUser:(NSString*) username;
