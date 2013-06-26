@@ -59,13 +59,52 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "dibs/XmppHandler.m"
-         timestampString = "393780882.746308"
+         filePath = "dibs/Foursquare/FoursquareManager.m"
+         timestampString = "393925381.602123"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "466"
-         endingLineNumber = "466"
-         landmarkName = "-xmppStream:didReceiveMessage:"
+         startingLineNumber = "105"
+         endingLineNumber = "105"
+         landmarkName = "-foursquareDidAuthorize:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "dibs/XmppHandler.m"
+         timestampString = "393925867.171959"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "591"
+         endingLineNumber = "591"
+         landmarkName = "-registerUser:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "dibs/XmppHandler.m"
+         timestampString = "393925575.486536"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "564"
+         endingLineNumber = "564"
+         landmarkName = "-xmppStreamDidRegister:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "dibs/XmppHandler.m"
+         timestampString = "393925867.171959"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "575"
+         endingLineNumber = "575"
+         landmarkName = "-xmppStream:didNotRegister:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

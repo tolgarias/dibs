@@ -83,10 +83,10 @@ bool activityIsLoaded = NO;
     }
     else {
         NSString* accessToken = [[userDataArray objectAtIndex:[selectedIndex intValue]] objectForKey:@"accessToken"];
-        NSString* displayName = [[userDataArray objectAtIndex:[selectedIndex intValue]] objectForKey:@"name"];
-        NSString* photo = [[userDataArray objectAtIndex:[selectedIndex intValue]] objectForKey:@"photo"];
+       // NSString* displayName = [[userDataArray objectAtIndex:[selectedIndex intValue]] objectForKey:@"name"];
+       // NSString* photo = [[userDataArray objectAtIndex:[selectedIndex intValue]] objectForKey:@"photo"];
         AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-        [app showChatView:accessToken name:displayName picture:photo];
+        [app showChatView:nil accessToken:accessToken];
     }
 }
 - (void)viewDidLoad
