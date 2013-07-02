@@ -23,6 +23,11 @@
 		9C71599E17685F8A0028B393 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C71599D17685F8A0028B393 /* CoreData.framework */; };
 		9C7159A01768697D0028B393 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C71599F1768697D0028B393 /* CoreLocation.framework */; };
 		9C7159A2176869EB0028B393 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C7159A1176869EB0028B393 /* SystemConfiguration.framework */; };
+		9C78739F1783133500A53491 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C78739E1783133500A53491 /* Default.png */; };
+		9C7873A317831E0400A53491 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C7873A217831E0400A53491 /* Default@2x.png */; };
+		9C7873A91783251300A53491 /* dibsicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C7873A81783251300A53491 /* dibsicon.png */; };
+		9C7873AB1783258A00A53491 /* dibsicon11.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C7873AA1783258A00A53491 /* dibsicon11.png */; };
+		9C7873AD17832A0200A53491 /* viewbg.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C7873AC17832A0100A53491 /* viewbg.png */; };
 		9C93F31317437C2B00C561C8 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C93F31117437C2B00C561C8 /* ChatViewController.m */; };
 		9C93F31A1743848500C561C8 /* aqua.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C93F3181743848500C561C8 /* aqua.png */; };
 		9C93F31B1743848500C561C8 /* orange.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C93F3191743848500C561C8 /* orange.png */; };
@@ -303,7 +308,7 @@
 		9C32137E171D7B6000557240 /* UrlConnectionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UrlConnectionManager.m; sourceTree = "<group>"; };
 		9C321380171D7CE800557240 /* UserData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
 		9C321381171D7CE800557240 /* UserData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserData.m; sourceTree = "<group>"; usesTabs = 0; };
-		9C321386171DAAA600557240 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		9C321386171DAAA600557240 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		9C32138D171DB88600557240 /* UserListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserListViewController.h; sourceTree = "<group>"; };
 		9C32138E171DB88700557240 /* UserListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserListViewController.m; sourceTree = "<group>"; };
 		9C32138F171DB88700557240 /* UserListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserListViewController.xib; sourceTree = "<group>"; };
@@ -313,6 +318,11 @@
 		9C71599D17685F8A0028B393 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		9C71599F1768697D0028B393 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		9C7159A1176869EB0028B393 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		9C78739E1783133500A53491 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../../../../Pictures/Default.png; sourceTree = "<group>"; };
+		9C7873A217831E0400A53491 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
+		9C7873A81783251300A53491 /* dibsicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dibsicon.png; sourceTree = SOURCE_ROOT; };
+		9C7873AA1783258A00A53491 /* dibsicon11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dibsicon11.png; sourceTree = SOURCE_ROOT; };
+		9C7873AC17832A0100A53491 /* viewbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = viewbg.png; sourceTree = "<group>"; };
 		9C93F31017437C2B00C561C8 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
 		9C93F31117437C2B00C561C8 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
 		9C93F3161743836500C561C8 /* SMMessageViewTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMMessageViewTableCell.h; sourceTree = "<group>"; };
@@ -1632,7 +1642,6 @@
 			isa = PBXGroup;
 			children = (
 				9CA7FBA71769FFE600C90B0F /* XMPP */,
-				9C321386171DAAA600557240 /* Default-568h@2x.png */,
 				9CF7B7D317145912007C2D69 /* dibs */,
 				9CF7B7C017145912007C2D69 /* Frameworks */,
 				9CF7B7BE17145912007C2D69 /* Products */,
@@ -1717,6 +1726,12 @@
 		9CF7B7D417145912007C2D69 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9C7873AC17832A0100A53491 /* viewbg.png */,
+				9C7873AA1783258A00A53491 /* dibsicon11.png */,
+				9C7873A81783251300A53491 /* dibsicon.png */,
+				9C321386171DAAA600557240 /* Default-568h@2x.png */,
+				9C7873A217831E0400A53491 /* Default@2x.png */,
+				9C78739E1783133500A53491 /* Default.png */,
 				9CE7270D1771E66300F59E79 /* like.png */,
 				9C93F3181743848500C561C8 /* aqua.png */,
 				9C93F3191743848500C561C8 /* orange.png */,
@@ -2164,6 +2179,11 @@
 				9CA7FBA61769FFE200C90B0F /* README.txt in Resources */,
 				9CE7270E1771E66300F59E79 /* like.png in Resources */,
 				D23E189E177A396B008D69E7 /* ChatViewController.xib in Resources */,
+				9C78739F1783133500A53491 /* Default.png in Resources */,
+				9C7873A317831E0400A53491 /* Default@2x.png in Resources */,
+				9C7873A91783251300A53491 /* dibsicon.png in Resources */,
+				9C7873AB1783258A00A53491 /* dibsicon11.png in Resources */,
+				9C7873AD17832A0200A53491 /* viewbg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2476,7 +2496,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Bilal Demirci (XJ2W4F4J47)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FOURSQUARE_CALLBACK_URL = "dibs://?";
@@ -2501,7 +2521,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8EA1841D-38A6-4E49-8FBA-8947A7BE7993";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2511,7 +2531,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Bilal Demirci (XJ2W4F4J47)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				FOURSQUARE_CALLBACK_URL = "dibs://?";
@@ -2535,7 +2555,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8EA1841D-38A6-4E49-8FBA-8947A7BE7993";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

@@ -33,19 +33,38 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    //UIImage *imageYouWantToPass = [UIImage imageNamed:@"Icon-72.png"];
-    //[profileImg setImage:imageYouWantToPass];
-    UIBarButtonItem *barButton = [[UIBarButtonItem alloc]
+    UIButton *a1 = [UIButton buttonWithType:UIButtonTypeCustom];
+    [a1 setFrame:CGRectMake(0.0f, 0.0f, 25.0f, 25.0f)];
+    [a1 addTarget:self action:@selector(logoutButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    [a1 setImage:[UIImage imageNamed:@"Icon.png"] forState:UIControlStateNormal];
+    //UIBarButtonItem *random = [[UIBarButtonItem alloc] initWithCustomView:a1];
+    
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:a1];
                                   //initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-                                  initWithImage:[UIImage imageNamed:@"Icon.png"] style:UIBarButtonItemStylePlain
-                                  target:self
-                                  action:@selector(logoutButtonPressed)];
+                                  //initWithImage:[UIImage imageNamed:@"Icon.png"] style:UIBarButtonItemStylePlain
+                                  //target:self
+                                  //action:@selector(logoutButtonPressed)];
     [[self navigationItem] setLeftBarButtonItem:barButton];
     
     [FoursquareManager sharedInstance].delegate = self;
     [FoursquareManager sharedInstance].selector = @selector(onUserDataReceived:);
     [[FoursquareManager sharedInstance] getUserData];
     [[self navigationItem] setTitle:@"Play Dibs"];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 120, 30)];
+    [label setBackgroundColor:[UIColor colorWithRed:255.f
+                                              green:255.f
+                                               blue:255.f
+                                              alpha:255.f]];
+    [[self navigationItem] setTitleView:label];
+    
+    
+    UIGraphicsBeginImageContext(self.view.frame.size);
+    [[UIImage imageNamed:@"viewbg.png"] drawInRect:self.view.bounds];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:image];
+    
     
 }
 -(void) logoutButtonPressed {

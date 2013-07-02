@@ -60,7 +60,9 @@
     [self likeUser:NO];
 }
 -(void) likeButtonPressed {
-    [self likeUser:YES];
+    if(selectedIndex>0){
+        [self likeUser:YES];
+    }
 }
 bool activityIsLoaded = NO;
 -(void) onLikeResponse:(NSDictionary*) jsonData{

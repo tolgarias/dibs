@@ -91,11 +91,17 @@
 {
     [super viewDidLoad];
     UIImage *image = [UIImage imageWithData:[vCard photo]];
-    UIBarButtonItem *barButton = [[UIBarButtonItem alloc]
+    UIButton *a1 = [UIButton buttonWithType:UIButtonTypeCustom];
+    [a1 setFrame:CGRectMake(0.0f, 0.0f, 40.0f, 40.0f)];
+    [a1 addTarget:self action:@selector(onProfileButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    [a1 setImage:image forState:UIControlStateNormal];
+
+    
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:a1];
                                   //initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-                                  initWithImage:image style:UIBarButtonItemStylePlain
-                                  target:self
-                                  action:@selector(onProfileButtonPressed)];
+                                  //initWithImage:image style:UIBarButtonItemStylePlain
+                                  //target:self
+                                  //action:@selector(onProfileButtonPressed)];
     [[self navigationItem] setRightBarButtonItem:barButton];
     [[self navigationItem] setTitle:[vCard nickname]];
 }
@@ -196,7 +202,7 @@ static CGFloat padding = 20.0;
         
 		bgImage = [[UIImage imageNamed:@"orange.png"] stretchableImageWithLeftCapWidth:24  topCapHeight:15];
 		
-		[cell.messageContentView setFrame:CGRectMake(padding, padding*2, size.width, size.height)];
+		[cell.messageContentView setFrame:CGRectMake(padding, padding*2, size.width+5, size.height)];
 		
 		[cell.bgImageView setFrame:CGRectMake( cell.messageContentView.frame.origin.x - padding/2,
 											  cell.messageContentView.frame.origin.y - padding/2,
@@ -209,7 +215,7 @@ static CGFloat padding = 20.0;
 		
 		[cell.messageContentView setFrame:CGRectMake(320 - size.width - padding,
 													 padding*2,
-													 size.width,
+													 size.width+5,
 													 size.height)];
 		
 		[cell.bgImageView setFrame:CGRectMake(cell.messageContentView.frame.origin.x - padding/2,
