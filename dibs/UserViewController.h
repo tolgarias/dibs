@@ -17,7 +17,7 @@
 @property (nonatomic,strong) IBOutlet UILabel *lblName;
 @property (nonatomic,strong) IBOutlet UILabel *lblVenue;
 @property (nonatomic,strong) IBOutlet UILabel *lblDate;
-
+@property (nonatomic,strong) IBOutlet UIActivityIndicatorView *indicator;
 
 
 -(IBAction)ShowUserList:(id)sender;

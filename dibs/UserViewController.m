@@ -18,7 +18,7 @@
 @end
 
 @implementation UserViewController
-@synthesize profileImg,lblDate,lblVenue,lblName;
+@synthesize profileImg,lblDate,lblVenue,lblName,indicator;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,29 +33,26 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    UIButton *a1 = [UIButton buttonWithType:UIButtonTypeCustom];
-    [a1 setFrame:CGRectMake(0.0f, 0.0f, 25.0f, 25.0f)];
+    //UIButton *a1 = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton *a1 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    //[a1 setFrame:CGRectMake(0.0f, 0.0f, 25.0f, 25.0f)];
     [a1 addTarget:self action:@selector(logoutButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    [a1 setImage:[UIImage imageNamed:@"Icon.png"] forState:UIControlStateNormal];
+    [a1.titleLabel setText:@"logout"];
+    //[a1 setImage:[UIImage imageNamed:@"Icon.png"] forState:UIControlStateNormal];
     //UIBarButtonItem *random = [[UIBarButtonItem alloc] initWithCustomView:a1];
-    
-    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:a1];
+    //[[UIBarButtonItem alloc] init]
+    //UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:a1];
                                   //initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                   //initWithImage:[UIImage imageNamed:@"Icon.png"] style:UIBarButtonItemStylePlain
                                   //target:self
                                   //action:@selector(logoutButtonPressed)];
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithTitle:@"logout" style:UIBarButtonSystemItemAction target:self action:@selector(logoutButtonPressed)];
     [[self navigationItem] setLeftBarButtonItem:barButton];
     
     [FoursquareManager sharedInstance].delegate = self;
     [FoursquareManager sharedInstance].selector = @selector(onUserDataReceived:);
     [[FoursquareManager sharedInstance] getUserData];
-    [[self navigationItem] setTitle:@"Play Dibs"];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 120, 30)];
-    [label setBackgroundColor:[UIColor colorWithRed:255.f
-                                              green:255.f
-                                               blue:255.f
-                                              alpha:255.f]];
-    [[self navigationItem] setTitleView:label];
+    
     
     
     UIGraphicsBeginImageContext(self.view.frame.size);
@@ -64,7 +61,13 @@
     UIGraphicsEndImageContext();
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:image];
-    
+    [profileImg.layer setBorderWidth:2.0];
+    [profileImg.layer setBorderColor:[[UIColor blackColor] CGColor]];
+    [indicator startAnimating];
+    lblVenue.layer.cornerRadius = 7.0;
+    lblVenue.layer.masksToBounds = YES;
+    lblDate.layer.cornerRadius = 7.0;
+    lblDate.layer.masksToBounds = YES;
     
 }
 -(void) logoutButtonPressed {
@@ -111,16 +114,20 @@
         [[UrlConnectionManager sharedInstance] postData:postData withUrl:@"https://www.dibstick.com/dibs_user.php"];
         //NSDictionary *params = [[NSDictionary alloc] initWithObjects:<#(NSArray *)#> forKeys:<#(NSArray *)#>]
     }
-    
+    NSString *about = [NSString stringWithFormat:@"You last checked in %@ at %@",venueName,bar];
+    NSString *userListfInfo = [NSString stringWithFormat:@"To see users who also checked in %@ please tap show user list button",venueName];
     
     UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:photo]]];
     [profileImg setImage:image];
-    [lblName setText:name];
-    [lblVenue setText:[NSString stringWithFormat:@"Last check-in:%@",venueName]];
-    [lblDate setText:[NSString stringWithFormat:@"Last check-in date:%@",bar]];
+    [lblVenue setText:about];
+    [lblDate setText:userListfInfo];
+    
     [XmppHandler sharedInstance].displayName = name;
     [XmppHandler sharedInstance].photo = UIImagePNGRepresentation(image);;
     [[XmppHandler sharedInstance] connect];
+    [indicator stopAnimating];
+    [indicator setHidden:YES];
+    [[self navigationItem] setTitle:name];
     
 }
 
