@@ -15,7 +15,7 @@
 
 @implementation DibsMaibViewController
 
-
+@synthesize infoLabel,hiImage;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -31,6 +31,16 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    UIGraphicsBeginImageContext(self.view.frame.size);
+    [[UIImage imageNamed:@"viewbg.png"] drawInRect:self.view.bounds];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:image];
+    [self.navigationItem setHidesBackButton:YES];
+    [self.navigationItem setTitle:@"Welcome To Dibs"];
+    [hiImage setImage:[UIImage imageNamed:@"hi.png"]];
+    
 }
 
 - (void)didReceiveMemoryWarning

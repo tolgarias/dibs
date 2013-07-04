@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "IntroLayer.h"
 #import "ChatViewController.h"
+#import "UserData.h"
 
 @implementation AppController
 
@@ -48,6 +49,17 @@
     //ChatViewController *viewController = [[ChatViewController alloc] initWithNibName:@"ChatViewController" bundle:[NSBundle mainBundle]];
     //navController_ = [[UINavigationController alloc] initWithRootViewController:viewController];
     //[viewController release];
+    
+    if([[NSUserDefaults standardUserDefaults] objectForKey:@"likeTime"]==nil){
+        [UserData sharedInstance].remainingLikeCount = [NSNumber numberWithInt:1];
+    }
+    else {
+        NSNumber *lastLikeInSec = [[NSUserDefaults standardUserDefaults] objectForKey:@"likeTime"];
+        NSNumber *currentTimeInSec = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]];
+        if([currentTimeInSec doubleValue]>[lastLikeInSec doubleValue]){
+            [UserData sharedInstance].remainingLikeCount = [NSNumber numberWithInt:1];
+        }
+    }
     
     navController_.title = @"Welcome to Dibs";
 	navController_.navigationBarHidden = NO;

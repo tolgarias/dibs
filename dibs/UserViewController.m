@@ -13,12 +13,13 @@
 #import "Utils.h"
 #import "XmppHandler.h"
 
-@interface UserViewController ()
-
+@interface UserViewController (){
+    
+}
 @end
 
 @implementation UserViewController
-@synthesize profileImg,lblDate,lblVenue,lblName,indicator;
+@synthesize profileImg,lblDate,lblVenue,lblName,indicator,lblLike,lblLikeBg,nextLike;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -61,13 +62,15 @@
     UIGraphicsEndImageContext();
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:image];
-    [profileImg.layer setBorderWidth:2.0];
-    [profileImg.layer setBorderColor:[[UIColor blackColor] CGColor]];
+    //[profileImg.layer setBorderWidth:2.0];
+    //[profileImg.layer setBorderColor:[[UIColor blackColor] CGColor]];
     [indicator startAnimating];
     lblVenue.layer.cornerRadius = 7.0;
     lblVenue.layer.masksToBounds = YES;
     lblDate.layer.cornerRadius = 7.0;
     lblDate.layer.masksToBounds = YES;
+    
+    
     
 }
 -(void) logoutButtonPressed {
@@ -101,12 +104,18 @@
     NSString *name = [NSString stringWithFormat:@"%@ %@",firstName,lastName];
     NSString *bar = [[Utils sharedInstance] getIntervalString:createdAt];
     
+    
+    
+    [UserData sharedInstance].name = name;
+    [UserData sharedInstance].accessToken = accessToken;
+    [UserData sharedInstance].lastCheckInVenue = venueId;
+    [UserData sharedInstance].lastCheckInVenueName = venueName;
+    [UserData sharedInstance].lastCheckInDate = bar;//[NSString stringWithFormat:@"%i",[createdAt intValue]];
+    [UserData sharedInstance].photoUrl = photo;
+    
+    
+    
     if(![[UserData sharedInstance].lastCheckInVenue isEqualToString:venueId]){
-        [UserData sharedInstance].name = name;
-        [UserData sharedInstance].accessToken = accessToken;
-        [UserData sharedInstance].lastCheckInVenue = venueId;
-        [UserData sharedInstance].lastCheckInDate = [NSString stringWithFormat:@"%i",[createdAt intValue]];
-        [UserData sharedInstance].photoUrl = photo;
         [UrlConnectionManager sharedInstance].delegate = self;
         [UrlConnectionManager sharedInstance].selector = @selector(onUserDataSend:);
         NSString* postData = [NSString stringWithFormat:@"&accessToken=%@&name=%@&photo=%@&lastCheckInDate=%@&lastCheckInValue=%@&venueName=%@&lat=%@&lng=%@",accessToken,name,photo,[NSString stringWithFormat:@"%i",[createdAt intValue]],venueId,venueName,[venueLocation objectForKey:@"lat"],[venueLocation objectForKey:@"lng"]];
@@ -114,13 +123,13 @@
         [[UrlConnectionManager sharedInstance] postData:postData withUrl:@"https://www.dibstick.com/dibs_user.php"];
         //NSDictionary *params = [[NSDictionary alloc] initWithObjects:<#(NSArray *)#> forKeys:<#(NSArray *)#>]
     }
-    NSString *about = [NSString stringWithFormat:@"You last checked in %@ at %@",venueName,bar];
-    NSString *userListfInfo = [NSString stringWithFormat:@"To see users who also checked in %@ please tap show user list button",venueName];
+    //NSString *about = [NSString stringWithFormat:@"You last checked in %@ at %@ and you have %i like remaining",venueName,bar,[[UserData sharedInstance].remainingLikeCount intValue]];
+    //NSString *userListfInfo = [NSString stringWithFormat:@"To see users who also checked in %@ please tap show user list button",venueName];
+    [self showUserInfo];
     
     UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:photo]]];
     [profileImg setImage:image];
-    [lblVenue setText:about];
-    [lblDate setText:userListfInfo];
+    
     
     [XmppHandler sharedInstance].displayName = name;
     [XmppHandler sharedInstance].photo = UIImagePNGRepresentation(image);;
@@ -129,6 +138,56 @@
     [indicator setHidden:YES];
     [[self navigationItem] setTitle:name];
     
+    
+    if([[UserData sharedInstance].remainingLikeCount intValue]==0){
+        
+        double likeTime = [[[NSUserDefaults standardUserDefaults] objectForKey:@"likeTime"] doubleValue]-[[NSDate date] timeIntervalSince1970];
+        [UserData sharedInstance].nextLike = [NSNumber numberWithDouble:likeTime];
+       
+        [NSTimer scheduledTimerWithTimeInterval:1
+                                         target:self
+                                       selector:@selector(showNextLike)
+                                        userInfo:nil
+                                        repeats:0];
+    }
+    
+}
+-(void) showUserInfo {
+    NSString *about = [NSString stringWithFormat:@"You last checked in %@ at %@ and you have %i like remaining",[UserData sharedInstance].lastCheckInVenueName,[UserData sharedInstance].lastCheckInDate,[[UserData sharedInstance].remainingLikeCount intValue]];
+    NSString *userListfInfo = [NSString stringWithFormat:@"To see users who also checked in %@ please tap show user list button",[UserData sharedInstance].lastCheckInVenueName];
+    [lblVenue setText:about];
+    [lblDate setText:userListfInfo];
+    if([[UserData sharedInstance].remainingLikeCount intValue]==0){
+        
+        double likeTime = [[[NSUserDefaults standardUserDefaults] objectForKey:@"likeTime"] doubleValue]-[[NSDate date] timeIntervalSince1970];
+        [UserData sharedInstance].nextLike = [NSNumber numberWithDouble:likeTime];
+        
+        [NSTimer scheduledTimerWithTimeInterval:1
+                                         target:self
+                                       selector:@selector(showNextLike)
+                                       userInfo:nil
+                                        repeats:0];
+    }
+
+}
+- (void)viewWillAppear:(BOOL)animated {
+    //NSLog(@"burda");
+    //[self showUserInfo];
+}
+-(void) setNextLikeLabels {
+    NSString *toLikeString = [NSString stringWithFormat:@"Next like in %@",[[Utils sharedInstance] getToString:[UserData sharedInstance].nextLike]];
+    [lblLike setHidden:NO];
+    [lblLikeBg setHidden:NO];
+    [lblLike setText:toLikeString];
+}
+-(void) showNextLike {
+    [UserData sharedInstance].nextLike = [NSNumber numberWithDouble:[[UserData sharedInstance].nextLike doubleValue]-1];
+    [self setNextLikeLabels];
+    [NSTimer scheduledTimerWithTimeInterval:1
+                                     target:self
+                                   selector:@selector(showNextLike)
+                                   userInfo:nil
+                                    repeats:0];
 }
 
 -(void) onUserDataSend:(NSData*) data {

@@ -104,6 +104,21 @@
                                   //action:@selector(onProfileButtonPressed)];
     [[self navigationItem] setRightBarButtonItem:barButton];
     [[self navigationItem] setTitle:[vCard nickname]];
+    
+    [self.tView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    UIImageView *tempImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"chatbg.png"]];
+    [tempImageView setFrame:self.tView.frame];
+    
+    self.tView.backgroundView = tempImageView;
+    [tempImageView release];
+    
+    
+    UIGraphicsBeginImageContext(self.view.frame.size);
+    [[UIImage imageNamed:@"viewbg.png"] drawInRect:self.view.bounds];
+    UIImage *image1 = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    self.view.backgroundColor = [UIColor colorWithPatternImage:image1];
+
 }
 
 -(void) onProfileButtonPressed{
@@ -227,6 +242,7 @@ static CGFloat padding = 20.0;
 	
 	cell.bgImageView.image = bgImage;
 	cell.senderAndTimeLabel.text = [NSString stringWithFormat:@"%@ %@", sender, time];
+    cell.senderAndTimeLabel.alpha = 0.5;
 	
 	return cell;
 	
@@ -265,6 +281,32 @@ static CGFloat padding = 20.0;
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [messageField resignFirstResponder];
     
+    receiver = [NSString stringWithFormat:@"%@@www.dibstick.com",chatWith];
+    NSLog(@"ChatWith:%@",receiver);
+    NSString *messageStr = self.messageField.text;
+	
+    if([messageStr length] > 0) {
+		self.messageField.text = @"";
+        NSMutableDictionary *m = [[NSMutableDictionary alloc] init];
+		[m setObject:messageStr forKey:@"msg"];
+		[m setObject:@"you" forKey:@"sender"];
+		[m setObject:[ChatViewController getCurrentTime] forKey:@"time"];
+		
+		[messages addObject:m];
+		[self.tView reloadData];
+		[m release];
+		[[XmppHandler sharedInstance] sendMessage:messageStr];
+    }
+	
+	NSIndexPath *topIndexPath = [NSIndexPath indexPathForRow:messages.count-1
+												   inSection:0];
+	
+	[self.tView scrollToRowAtIndexPath:topIndexPath
+					  atScrollPosition:UITableViewScrollPositionMiddle
+							  animated:YES];
+    
+    self.messageField.text = @"";
+
    
     return NO;
 }

@@ -12,4 +12,5 @@
 
 +(Utils*) sharedInstance;
 -(NSString*) getIntervalString:(NSNumber  *) time;
+-(NSString*) getToString:(NSNumber  *) time;
 @end

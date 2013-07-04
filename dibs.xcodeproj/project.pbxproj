@@ -28,6 +28,8 @@
 		9C7873A91783251300A53491 /* dibsicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C7873A81783251300A53491 /* dibsicon.png */; };
 		9C7873AB1783258A00A53491 /* dibsicon11.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C7873AA1783258A00A53491 /* dibsicon11.png */; };
 		9C7873AD17832A0200A53491 /* viewbg.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C7873AC17832A0100A53491 /* viewbg.png */; };
+		9C7873AF17856A9C00A53491 /* hi.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C7873AE17856A9B00A53491 /* hi.png */; };
+		9C7873B1178571F700A53491 /* chatbg.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C7873B0178571F700A53491 /* chatbg.png */; };
 		9C93F31317437C2B00C561C8 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C93F31117437C2B00C561C8 /* ChatViewController.m */; };
 		9C93F31A1743848500C561C8 /* aqua.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C93F3181743848500C561C8 /* aqua.png */; };
 		9C93F31B1743848500C561C8 /* orange.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C93F3191743848500C561C8 /* orange.png */; };
@@ -172,7 +174,6 @@
 		9CF7B7CE17145912007C2D69 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CF7B7CD17145912007C2D69 /* Foundation.framework */; };
 		9CF7B7D017145912007C2D69 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CF7B7CF17145912007C2D69 /* CoreGraphics.framework */; };
 		9CF7B7D217145912007C2D69 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CF7B7D117145912007C2D69 /* GameKit.framework */; };
-		9CF7B7D617145912007C2D69 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CF7B7D517145912007C2D69 /* Default.png */; };
 		9CF7B7D817145912007C2D69 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CF7B7D717145912007C2D69 /* Default-Landscape~ipad.png */; };
 		9CF7B7DA17145912007C2D69 /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CF7B7D917145912007C2D69 /* fps_images.png */; };
 		9CF7B7DC17145912007C2D69 /* fps_images-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CF7B7DB17145912007C2D69 /* fps_images-hd.png */; };
@@ -323,6 +324,8 @@
 		9C7873A81783251300A53491 /* dibsicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dibsicon.png; sourceTree = SOURCE_ROOT; };
 		9C7873AA1783258A00A53491 /* dibsicon11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dibsicon11.png; sourceTree = SOURCE_ROOT; };
 		9C7873AC17832A0100A53491 /* viewbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = viewbg.png; sourceTree = "<group>"; };
+		9C7873AE17856A9B00A53491 /* hi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hi.png; sourceTree = "<group>"; };
+		9C7873B0178571F700A53491 /* chatbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chatbg.png; sourceTree = "<group>"; };
 		9C93F31017437C2B00C561C8 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
 		9C93F31117437C2B00C561C8 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
 		9C93F3161743836500C561C8 /* SMMessageViewTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMMessageViewTableCell.h; sourceTree = "<group>"; };
@@ -603,7 +606,6 @@
 		9CF7B7CD17145912007C2D69 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9CF7B7CF17145912007C2D69 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		9CF7B7D117145912007C2D69 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
-		9CF7B7D517145912007C2D69 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Resources/Default.png; sourceTree = "<group>"; };
 		9CF7B7D717145912007C2D69 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape~ipad.png"; path = "Resources/Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		9CF7B7D917145912007C2D69 /* fps_images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fps_images.png; path = Resources/fps_images.png; sourceTree = "<group>"; };
 		9CF7B7DB17145912007C2D69 /* fps_images-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fps_images-hd.png"; path = "Resources/fps_images-hd.png"; sourceTree = "<group>"; };
@@ -1726,6 +1728,8 @@
 		9CF7B7D417145912007C2D69 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9C7873B0178571F700A53491 /* chatbg.png */,
+				9C7873AE17856A9B00A53491 /* hi.png */,
 				9C7873AC17832A0100A53491 /* viewbg.png */,
 				9C7873AA1783258A00A53491 /* dibsicon11.png */,
 				9C7873A81783251300A53491 /* dibsicon.png */,
@@ -1735,7 +1739,6 @@
 				9CE7270D1771E66300F59E79 /* like.png */,
 				9C93F3181743848500C561C8 /* aqua.png */,
 				9C93F3191743848500C561C8 /* orange.png */,
-				9CF7B7D517145912007C2D69 /* Default.png */,
 				9CF7B7D717145912007C2D69 /* Default-Landscape~ipad.png */,
 				9CF7B7D917145912007C2D69 /* fps_images.png */,
 				9CF7B7DB17145912007C2D69 /* fps_images-hd.png */,
@@ -2156,7 +2159,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9CF7B7D617145912007C2D69 /* Default.png in Resources */,
 				9CF7B7D817145912007C2D69 /* Default-Landscape~ipad.png in Resources */,
 				9CF7B7DA17145912007C2D69 /* fps_images.png in Resources */,
 				9CF7B7DC17145912007C2D69 /* fps_images-hd.png in Resources */,
@@ -2184,6 +2186,8 @@
 				9C7873A91783251300A53491 /* dibsicon.png in Resources */,
 				9C7873AB1783258A00A53491 /* dibsicon11.png in Resources */,
 				9C7873AD17832A0200A53491 /* viewbg.png in Resources */,
+				9C7873AF17856A9C00A53491 /* hi.png in Resources */,
+				9C7873B1178571F700A53491 /* chatbg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
