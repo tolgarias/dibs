@@ -9,7 +9,7 @@
 #import "UserData.h"
 
 @implementation UserData
-@synthesize name,photoUrl,accessToken,lastCheckInVenue,lastCheckInDate,lastCheckInVenueName,remainingLikeCount,nextLike;
+@synthesize name,photoUrl,accessToken,lastCheckInVenue,lastCheckInDate,lastCheckInVenueName,remainingLikeCount,nextLike,userInfoChanged;
 
 static UserData* sharedInstance;
 

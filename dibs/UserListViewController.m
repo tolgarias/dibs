@@ -20,7 +20,7 @@
 
 @implementation UserListViewController
 
-@synthesize users=users_,userList,userTableView,userDataArray,selectedIndex,likes;
+@synthesize users=users_,userList,userTableView,userDataArray,selectedIndex,likes,indicator,loadingLabel;
 @synthesize activityView,indx;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -53,12 +53,14 @@
         [self.userTableView reloadData];
         int likeCount = [[UserData sharedInstance].remainingLikeCount intValue]-1;
         [UserData sharedInstance].remainingLikeCount = [NSNumber numberWithInt:likeCount];
+        [UserData sharedInstance].userInfoChanged = [NSNumber numberWithInt:1];
         NSString *buttonTitle = [NSString stringWithFormat:@"%i like",[[UserData sharedInstance].remainingLikeCount intValue]];
         [[self navigationItem].rightBarButtonItem setTitle:buttonTitle];
         
-        NSNumber *currentTime = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]+600];
+        NSNumber *currentTime = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]+120];
         [[NSUserDefaults standardUserDefaults] setObject:currentTime forKey:@"likeTime"];
         [[NSUserDefaults standardUserDefaults] synchronize];
+        
         
     }
 }
@@ -128,7 +130,18 @@ bool activityIsLoaded = NO;
     NSString *buttonTitle = [NSString stringWithFormat:@"%i like",[[UserData sharedInstance].remainingLikeCount intValue]];
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithTitle:buttonTitle style:UIBarButtonSystemItemAction target:self action:@selector(likeButtonPressed)];
     [[self navigationItem] setRightBarButtonItem:barButton];
+    [self showLoading:NO];
 
+}
+-(void) showLoading:(BOOL) show {
+    [loadingLabel setHidden:show];
+    [indicator setHidden:show];
+    if(!show) {
+        [indicator startAnimating];
+    }
+    else {
+        [indicator stopAnimating];
+    }
 }
 -(void) onUserListReceived:(NSDictionary*) jsonData {
     //NSLog(@"%@",jsonData);
@@ -192,5 +205,13 @@ bool activityIsLoaded = NO;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 78;
+}
+-(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if([indexPath row] == ((NSIndexPath*)[[tableView indexPathsForVisibleRows] lastObject]).row){
+        //end of loading
+        //for example [activityIndicator stopAnimating];
+        [self showLoading:YES];
+    }
 }
 @end

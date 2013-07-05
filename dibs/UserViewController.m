@@ -19,7 +19,7 @@
 @end
 
 @implementation UserViewController
-@synthesize profileImg,lblDate,lblVenue,lblName,indicator,lblLike,lblLikeBg,nextLike;
+@synthesize profileImg,lblDate,lblVenue,lblName,indicator,lblLike,lblLikeBg,nextLike,lblLoading;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -50,9 +50,12 @@
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithTitle:@"logout" style:UIBarButtonSystemItemAction target:self action:@selector(logoutButtonPressed)];
     [[self navigationItem] setLeftBarButtonItem:barButton];
     
+    UIBarButtonItem *reloadButton = [[UIBarButtonItem alloc] initWithTitle:@"reload" style:UIBarButtonSystemItemAction target:self action:@selector(getUserData)];
+    [[self navigationItem] setRightBarButtonItem:reloadButton];
+    
     [FoursquareManager sharedInstance].delegate = self;
     [FoursquareManager sharedInstance].selector = @selector(onUserDataReceived:);
-    [[FoursquareManager sharedInstance] getUserData];
+    [self getUserData];
     
     
     
@@ -64,7 +67,7 @@
     self.view.backgroundColor = [UIColor colorWithPatternImage:image];
     //[profileImg.layer setBorderWidth:2.0];
     //[profileImg.layer setBorderColor:[[UIColor blackColor] CGColor]];
-    [indicator startAnimating];
+    
     lblVenue.layer.cornerRadius = 7.0;
     lblVenue.layer.masksToBounds = YES;
     lblDate.layer.cornerRadius = 7.0;
@@ -72,6 +75,12 @@
     
     
     
+}
+-(void) getUserData {
+ [[FoursquareManager sharedInstance] getUserData];
+ [indicator setHidden:NO];
+ [indicator startAnimating];
+ [lblLoading setHidden:NO];
 }
 -(void) logoutButtonPressed {
     [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"accessToken"];
@@ -85,6 +94,7 @@
 }
 
 - (void) onUserDataReceived:(NSObject*) data {
+    [lblLoading setHidden:YES];
     NSDictionary* responseData = [FoursquareManager sharedInstance].response;
     
     NSLog(@"%@",responseData);
@@ -103,19 +113,20 @@
     NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
     NSString *name = [NSString stringWithFormat:@"%@ %@",firstName,lastName];
     NSString *bar = [[Utils sharedInstance] getIntervalString:createdAt];
-    
-    
-    
-    [UserData sharedInstance].name = name;
-    [UserData sharedInstance].accessToken = accessToken;
-    [UserData sharedInstance].lastCheckInVenue = venueId;
-    [UserData sharedInstance].lastCheckInVenueName = venueName;
     [UserData sharedInstance].lastCheckInDate = bar;//[NSString stringWithFormat:@"%i",[createdAt intValue]];
-    [UserData sharedInstance].photoUrl = photo;
+    
+    
+    
     
     
     
     if(![[UserData sharedInstance].lastCheckInVenue isEqualToString:venueId]){
+        [UserData sharedInstance].name = name;
+        [UserData sharedInstance].accessToken = accessToken;
+        [UserData sharedInstance].lastCheckInVenue = venueId;
+        [UserData sharedInstance].lastCheckInVenueName = venueName;
+        
+        [UserData sharedInstance].photoUrl = photo;
         [UrlConnectionManager sharedInstance].delegate = self;
         [UrlConnectionManager sharedInstance].selector = @selector(onUserDataSend:);
         NSString* postData = [NSString stringWithFormat:@"&accessToken=%@&name=%@&photo=%@&lastCheckInDate=%@&lastCheckInValue=%@&venueName=%@&lat=%@&lng=%@",accessToken,name,photo,[NSString stringWithFormat:@"%i",[createdAt intValue]],venueId,venueName,[venueLocation objectForKey:@"lat"],[venueLocation objectForKey:@"lng"]];
@@ -138,6 +149,7 @@
     [indicator setHidden:YES];
     [[self navigationItem] setTitle:name];
     
+
     
     if([[UserData sharedInstance].remainingLikeCount intValue]==0){
         
@@ -153,26 +165,34 @@
     
 }
 -(void) showUserInfo {
+    //BOOL repeat = YES;
+    
     NSString *about = [NSString stringWithFormat:@"You last checked in %@ at %@ and you have %i like remaining",[UserData sharedInstance].lastCheckInVenueName,[UserData sharedInstance].lastCheckInDate,[[UserData sharedInstance].remainingLikeCount intValue]];
     NSString *userListfInfo = [NSString stringWithFormat:@"To see users who also checked in %@ please tap show user list button",[UserData sharedInstance].lastCheckInVenueName];
     [lblVenue setText:about];
     [lblDate setText:userListfInfo];
+    
     if([[UserData sharedInstance].remainingLikeCount intValue]==0){
         
         double likeTime = [[[NSUserDefaults standardUserDefaults] objectForKey:@"likeTime"] doubleValue]-[[NSDate date] timeIntervalSince1970];
         [UserData sharedInstance].nextLike = [NSNumber numberWithDouble:likeTime];
         
-        [NSTimer scheduledTimerWithTimeInterval:1
-                                         target:self
+            [NSTimer scheduledTimerWithTimeInterval:1
+                                       target:self
                                        selector:@selector(showNextLike)
                                        userInfo:nil
                                         repeats:0];
     }
+    
 
 }
 - (void)viewWillAppear:(BOOL)animated {
-    //NSLog(@"burda");
-    //[self showUserInfo];
+    NSLog(@"userDataChanged:%i",[[UserData sharedInstance].userInfoChanged intValue]);
+    if([[UserData sharedInstance].userInfoChanged intValue]==1){
+        [self showUserInfo];
+        [UserData sharedInstance].userInfoChanged = [NSNumber numberWithInt:0];
+    }
+
 }
 -(void) setNextLikeLabels {
     NSString *toLikeString = [NSString stringWithFormat:@"Next like in %@",[[Utils sharedInstance] getToString:[UserData sharedInstance].nextLike]];
@@ -182,12 +202,20 @@
 }
 -(void) showNextLike {
     [UserData sharedInstance].nextLike = [NSNumber numberWithDouble:[[UserData sharedInstance].nextLike doubleValue]-1];
-    [self setNextLikeLabels];
-    [NSTimer scheduledTimerWithTimeInterval:1
+    if([[UserData sharedInstance].nextLike intValue]<=0){
+        [UserData sharedInstance].remainingLikeCount= [NSNumber numberWithInt:1];
+        [lblLikeBg setHidden:YES];
+        [lblLike setHidden:YES];
+        [self showUserInfo];
+    }
+    else {
+        [self setNextLikeLabels];
+        [NSTimer scheduledTimerWithTimeInterval:1
                                      target:self
                                    selector:@selector(showNextLike)
                                    userInfo:nil
                                     repeats:0];
+    }
 }
 
 -(void) onUserDataSend:(NSData*) data {

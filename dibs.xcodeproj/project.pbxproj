@@ -30,6 +30,7 @@
 		9C7873AD17832A0200A53491 /* viewbg.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C7873AC17832A0100A53491 /* viewbg.png */; };
 		9C7873AF17856A9C00A53491 /* hi.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C7873AE17856A9B00A53491 /* hi.png */; };
 		9C7873B1178571F700A53491 /* chatbg.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C7873B0178571F700A53491 /* chatbg.png */; };
+		9C7873B31786F57000A53491 /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C7873B21786F56F00A53491 /* like.png */; };
 		9C93F31317437C2B00C561C8 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C93F31117437C2B00C561C8 /* ChatViewController.m */; };
 		9C93F31A1743848500C561C8 /* aqua.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C93F3181743848500C561C8 /* aqua.png */; };
 		9C93F31B1743848500C561C8 /* orange.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C93F3191743848500C561C8 /* orange.png */; };
@@ -164,7 +165,6 @@
 		9CDFD66917670DFB00B9E28A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CDFD66817670DFB00B9E28A /* Security.framework */; };
 		9CE6FCAC1718464E00438AEA /* DibsMaibViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CE6FCAA1718464E00438AEA /* DibsMaibViewController.m */; };
 		9CE6FCAD1718464E00438AEA /* DibsMaibViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9CE6FCAB1718464E00438AEA /* DibsMaibViewController.xib */; };
-		9CE7270E1771E66300F59E79 /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CE7270D1771E66300F59E79 /* like.png */; };
 		9CF7B7C217145912007C2D69 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CF7B7C117145912007C2D69 /* QuartzCore.framework */; };
 		9CF7B7C417145912007C2D69 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CF7B7C317145912007C2D69 /* OpenGLES.framework */; };
 		9CF7B7C617145912007C2D69 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CF7B7C517145912007C2D69 /* OpenAL.framework */; };
@@ -326,6 +326,7 @@
 		9C7873AC17832A0100A53491 /* viewbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = viewbg.png; sourceTree = "<group>"; };
 		9C7873AE17856A9B00A53491 /* hi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hi.png; sourceTree = "<group>"; };
 		9C7873B0178571F700A53491 /* chatbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chatbg.png; sourceTree = "<group>"; };
+		9C7873B21786F56F00A53491 /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like.png; sourceTree = "<group>"; };
 		9C93F31017437C2B00C561C8 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
 		9C93F31117437C2B00C561C8 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
 		9C93F3161743836500C561C8 /* SMMessageViewTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMMessageViewTableCell.h; sourceTree = "<group>"; };
@@ -595,7 +596,6 @@
 		9CE6FCA91718464E00438AEA /* DibsMaibViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DibsMaibViewController.h; sourceTree = "<group>"; };
 		9CE6FCAA1718464E00438AEA /* DibsMaibViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DibsMaibViewController.m; sourceTree = "<group>"; };
 		9CE6FCAB1718464E00438AEA /* DibsMaibViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DibsMaibViewController.xib; sourceTree = "<group>"; };
-		9CE7270D1771E66300F59E79 /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like.png; sourceTree = "<group>"; };
 		9CF7B7BD17145912007C2D69 /* dibs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dibs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CF7B7C117145912007C2D69 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		9CF7B7C317145912007C2D69 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -1728,6 +1728,7 @@
 		9CF7B7D417145912007C2D69 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9C7873B21786F56F00A53491 /* like.png */,
 				9C7873B0178571F700A53491 /* chatbg.png */,
 				9C7873AE17856A9B00A53491 /* hi.png */,
 				9C7873AC17832A0100A53491 /* viewbg.png */,
@@ -1736,7 +1737,6 @@
 				9C321386171DAAA600557240 /* Default-568h@2x.png */,
 				9C7873A217831E0400A53491 /* Default@2x.png */,
 				9C78739E1783133500A53491 /* Default.png */,
-				9CE7270D1771E66300F59E79 /* like.png */,
 				9C93F3181743848500C561C8 /* aqua.png */,
 				9C93F3191743848500C561C8 /* orange.png */,
 				9CF7B7D717145912007C2D69 /* Default-Landscape~ipad.png */,
@@ -2179,7 +2179,6 @@
 				9C93F31A1743848500C561C8 /* aqua.png in Resources */,
 				9C93F31B1743848500C561C8 /* orange.png in Resources */,
 				9CA7FBA61769FFE200C90B0F /* README.txt in Resources */,
-				9CE7270E1771E66300F59E79 /* like.png in Resources */,
 				D23E189E177A396B008D69E7 /* ChatViewController.xib in Resources */,
 				9C78739F1783133500A53491 /* Default.png in Resources */,
 				9C7873A317831E0400A53491 /* Default@2x.png in Resources */,
@@ -2188,6 +2187,7 @@
 				9C7873AD17832A0200A53491 /* viewbg.png in Resources */,
 				9C7873AF17856A9C00A53491 /* hi.png in Resources */,
 				9C7873B1178571F700A53491 /* chatbg.png in Resources */,
+				9C7873B31786F57000A53491 /* like.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
