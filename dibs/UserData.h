@@ -18,6 +18,9 @@
 @property (retain,atomic) NSString* accessToken;
 @property (retain,atomic) NSString* lastCheckInVenue;
 @property (retain,atomic) NSString* lastCheckInDate;
-
+@property (retain,atomic) NSString* lastCheckInVenueName;
+@property (retain,atomic) NSNumber* remainingLikeCount;
+@property (retain,atomic) NSNumber* nextLike;
+@property (retain,atomic) NSNumber* userInfoChanged;
 
 @end

@@ -20,7 +20,7 @@
 
 @implementation UserListViewController
 
-@synthesize users=users_,userList,userTableView,userDataArray,selectedIndex,likes;
+@synthesize users=users_,userList,userTableView,userDataArray,selectedIndex,likes,indicator,loadingLabel;
 @synthesize activityView,indx;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -30,37 +30,47 @@
         // Custom initialization
         users_ = [[NSArray alloc] init];
         userDataArray = [[NSMutableArray alloc] init];
-        
-            UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonItemStylePlain target:self action:@selector(likeButtonPressed)];
-        [barButton setTitle:@"Like"];
-            [[self navigationItem] setRightBarButtonItem:barButton];
+            //[barButton setTitle:@"Like"];
+            
         //activityView =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
         likes = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
 -(void) likeUser:(BOOL)insertLike{
-    NSString* like = @"0";
-    if(insertLike==YES) {
-        like = @"1";
-    }
-    NSString *postData = [NSString stringWithFormat:@"accessToken=%@&likeAccessToken=%@&venueId=%@&insertLike=%@",[UserData sharedInstance].accessToken,[[userDataArray objectAtIndex:[selectedIndex intValue]] objectForKey:@"accessToken"],[UserData sharedInstance].lastCheckInVenue,like];
-    //NSLog(@"postData:%@",postData);
-    [UrlConnectionManager sharedInstance].delegate = self;
-    [UrlConnectionManager sharedInstance].selector = @selector(onLikeResponse:);
-    [[UrlConnectionManager sharedInstance] postData:postData withUrl:@"https://www.dibstick.com/dibs_likeuser.php"];
+    if([[UserData sharedInstance].remainingLikeCount intValue]>0){
+        NSString* like = @"0";
+        if(insertLike==YES) {
+            like = @"1";
+        }
+        NSString *postData = [NSString stringWithFormat:@"accessToken=%@&likeAccessToken=%@&venueId=%@&insertLike=%@",[UserData sharedInstance].accessToken,[[userDataArray objectAtIndex:[selectedIndex intValue]] objectForKey:@"accessToken"],[UserData sharedInstance].lastCheckInVenue,like];
+        
+        [UrlConnectionManager sharedInstance].delegate = self;
+        [UrlConnectionManager sharedInstance].selector = @selector(onLikeResponse:);
+        [[UrlConnectionManager sharedInstance] postData:postData withUrl:@"https://www.dibstick.com/dibs_likeuser.php"];
     
-    [likes setObject:@"1" forKey:selectedIndex];
-    //[self.userTableView beginUpdates];
-    //[self.userTableView reloadRowsAtIndexPaths:@[indx] withRowAnimation:UITableViewRowAnimationNone];
-    //[self.userTableView endUpdates];
-    [self.userTableView reloadData];
+        [likes setObject:@"1" forKey:selectedIndex];
+        [self.userTableView reloadData];
+        int likeCount = [[UserData sharedInstance].remainingLikeCount intValue]-1;
+        [UserData sharedInstance].remainingLikeCount = [NSNumber numberWithInt:likeCount];
+        [UserData sharedInstance].userInfoChanged = [NSNumber numberWithInt:1];
+        NSString *buttonTitle = [NSString stringWithFormat:@"%i like",[[UserData sharedInstance].remainingLikeCount intValue]];
+        [[self navigationItem].rightBarButtonItem setTitle:buttonTitle];
+        
+        NSNumber *currentTime = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]+120];
+        [[NSUserDefaults standardUserDefaults] setObject:currentTime forKey:@"likeTime"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        
+    }
 }
 -(void) likeUserSelector {
     [self likeUser:NO];
 }
 -(void) likeButtonPressed {
-    [self likeUser:YES];
+    if(selectedIndex>0){
+        [self likeUser:YES];
+    }
 }
 bool activityIsLoaded = NO;
 -(void) onLikeResponse:(NSDictionary*) jsonData{
@@ -83,10 +93,10 @@ bool activityIsLoaded = NO;
     }
     else {
         NSString* accessToken = [[userDataArray objectAtIndex:[selectedIndex intValue]] objectForKey:@"accessToken"];
-        NSString* displayName = [[userDataArray objectAtIndex:[selectedIndex intValue]] objectForKey:@"name"];
-        NSString* photo = [[userDataArray objectAtIndex:[selectedIndex intValue]] objectForKey:@"photo"];
+       // NSString* displayName = [[userDataArray objectAtIndex:[selectedIndex intValue]] objectForKey:@"name"];
+       // NSString* photo = [[userDataArray objectAtIndex:[selectedIndex intValue]] objectForKey:@"photo"];
         AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-        [app showChatView:accessToken name:displayName picture:photo];
+        [app showChatView:nil accessToken:accessToken];
     }
 }
 - (void)viewDidLoad
@@ -100,6 +110,38 @@ bool activityIsLoaded = NO;
     [UrlConnectionManager sharedInstance].delegate = self;
     [UrlConnectionManager sharedInstance].selector = @selector(onUserListReceived:);
     [[UrlConnectionManager sharedInstance] postData:postData withUrl:@"https://www.dibstick.com/dibs_userlist.php"];
+    
+    UIImageView *tempImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"viewbg.png"]];
+    [tempImageView setFrame:self.userTableView.frame];
+    
+    self.userTableView.backgroundView = tempImageView;
+    [tempImageView release];
+    [self.navigationItem setTitle:[UserData sharedInstance].lastCheckInVenueName];
+    
+    if([[UserData sharedInstance].remainingLikeCount intValue]==0){
+        NSNumber *lastLikeInSec = [[NSUserDefaults standardUserDefaults] objectForKey:@"likeTime"];
+        NSNumber *currentTimeInSec = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]];
+        if([currentTimeInSec doubleValue]-[lastLikeInSec doubleValue]>600){
+            [UserData sharedInstance].remainingLikeCount = [NSNumber numberWithInt:1];
+        }
+    }
+    
+    
+    NSString *buttonTitle = [NSString stringWithFormat:@"%i like",[[UserData sharedInstance].remainingLikeCount intValue]];
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithTitle:buttonTitle style:UIBarButtonSystemItemAction target:self action:@selector(likeButtonPressed)];
+    [[self navigationItem] setRightBarButtonItem:barButton];
+    [self showLoading:NO];
+
+}
+-(void) showLoading:(BOOL) show {
+    [loadingLabel setHidden:show];
+    [indicator setHidden:show];
+    if(!show) {
+        [indicator startAnimating];
+    }
+    else {
+        [indicator stopAnimating];
+    }
 }
 -(void) onUserListReceived:(NSDictionary*) jsonData {
     //NSLog(@"%@",jsonData);
@@ -163,5 +205,13 @@ bool activityIsLoaded = NO;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 78;
+}
+-(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if([indexPath row] == ((NSIndexPath*)[[tableView indexPathsForVisibleRows] lastObject]).row){
+        //end of loading
+        //for example [activityIndicator stopAnimating];
+        [self showLoading:YES];
+    }
 }
 @end

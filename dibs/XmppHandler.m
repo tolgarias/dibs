@@ -562,7 +562,12 @@ static XmppHandler* sharedInstance;
 - (void)xmppStreamDidRegister:(XMPPStream *)sender{
     
     NSLog(@"I'm in register method");
-    [self connect];
+    NSError *error = nil;
+	
+	if (![[self xmppStream] authenticateWithPassword:password error:&error])
+	{
+		DDLogError(@"Error authenticating: %@", error);
+	}
 }
 
 - (void)xmppStream:(XMPPStream *)sender didNotRegister:(NSXMLElement

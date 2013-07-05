@@ -46,4 +46,28 @@ static Utils *sharedInstance;
     }
     return result;
 }
+-(NSString *) getToString:(NSNumber *)timeInSeconds {
+    double interval = [timeInSeconds doubleValue];
+    
+    NSMutableString *result=[[NSMutableString alloc] init];
+    if(interval>3600*24){
+        return [[NSDate dateWithTimeIntervalSince1970:[timeInSeconds intValue]] description];
+    }
+    else {
+        int hour = interval/3600;
+        int minutes = (interval-hour*3600)/60;
+        int seconds = interval - (hour*3600) - minutes*60;
+        if(hour>0){
+            [result appendString:[NSString stringWithFormat:@"%i hour(s) ",hour]];
+        }
+        if(minutes>0){
+            [result appendString:[NSString stringWithFormat:@"%i minute(s) ",minutes]];
+        }
+        if(seconds>0){
+            [result appendString:[NSString stringWithFormat:@"%i second(s) ",seconds]];
+        }
+        
+    }
+    return result;
+}
 @end

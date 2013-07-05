@@ -43,16 +43,16 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "No"
+         shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "dibs/UserViewController.m"
-         timestampString = "393346958.817619"
+         filePath = "dibs/XmppHandler.m"
+         timestampString = "393925867.171959"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "83"
-         endingLineNumber = "83"
-         landmarkName = "-onUserDataReceived:"
+         startingLineNumber = "591"
+         endingLineNumber = "591"
+         landmarkName = "-registerUser:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -60,12 +60,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "dibs/XmppHandler.m"
-         timestampString = "393780882.746308"
+         timestampString = "393925575.486536"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "466"
-         endingLineNumber = "466"
-         landmarkName = "-xmppStream:didReceiveMessage:"
+         startingLineNumber = "564"
+         endingLineNumber = "564"
+         landmarkName = "-xmppStreamDidRegister:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "dibs/XmppHandler.m"
+         timestampString = "393925867.171959"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "575"
+         endingLineNumber = "575"
+         landmarkName = "-xmppStream:didNotRegister:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

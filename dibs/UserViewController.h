@@ -18,6 +18,14 @@
 @property (nonatomic,strong) IBOutlet UILabel *lblVenue;
 @property (nonatomic,strong) IBOutlet UILabel *lblDate;
 
+@property (nonatomic,strong) IBOutlet UILabel *lblLikeBg;
+@property (nonatomic,strong) IBOutlet UILabel *lblLike;
+
+@property (nonatomic,strong) IBOutlet UILabel *lblLoading;
+
+@property (nonatomic,strong) IBOutlet UIActivityIndicatorView *indicator;
+
+@property (atomic,strong)  NSNumber *nextLike;
 
 
 -(IBAction)ShowUserList:(id)sender;

@@ -12,10 +12,10 @@
 @interface DibsMaibViewController : UIViewController{
     
 }
-
-
+@property (nonatomic,strong) IBOutlet UILabel *infoLabel;
+@property (nonatomic,strong) IBOutlet UIImageView *hiImage;
 
 
 -(IBAction)LoginWithFourSquare:(id)sender;
-@property (nonatomic,strong) IBOutlet UIActivityIndicatorView *spinner;
+
 @end
