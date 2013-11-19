@@ -7,7 +7,7 @@
 //
 
 #import "DibsMaibViewController.h"
-
+#import "FacebookManager.h"
 
 @interface DibsMaibViewController ()
 
@@ -50,10 +50,26 @@
 }
 
 -(IBAction)LoginWithFourSquare:(id)sender{
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"loginType"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     [[FoursquareManager sharedInstance] startAuth];
     //return self;
 }
 
+-(IBAction)LoginWithFacebook:(id)sender{
+    [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"loginType"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    if(FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded && FBSession.activeSession.isOpen){
+        //[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[GameLayer scene] withColor:ccWHITE]];
+        //[[SceneManager sharedSceneManager] changeScene:kProfileLayer];
+    }
+    else {
+        //[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[LoginLayer scene] withColor:ccWHITE]];
+        //[[SceneManager sharedSceneManager] changeScene:kLoginLayer];
+        [[FacebookManager sharedInstance] openSession];
+        
+    }
 
+}
 
 @end

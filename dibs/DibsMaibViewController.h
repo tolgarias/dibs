@@ -17,5 +17,6 @@
 
 
 -(IBAction)LoginWithFourSquare:(id)sender;
+-(IBAction)LoginWithFacebook:(id)sender;
 
 @end

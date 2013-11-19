@@ -12,6 +12,7 @@
 #import "IntroLayer.h"
 #import "ChatViewController.h"
 #import "UserData.h"
+#import "FacebookManager.h"
 
 @implementation AppController
 
@@ -74,10 +75,16 @@
 	return YES;
 }
 
+
 // Supported orientations: Landscape. Customize it for your own needs
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	return UIInterfaceOrientationIsLandscape(interfaceOrientation);
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
+    AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
+    [app showChatView:[notification.userInfo objectForKey:@"body"] accessToken:[notification.userInfo objectForKey:@"from"]];
 }
 
 
@@ -126,7 +133,13 @@
 }
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
-    return [[FoursquareManager sharedInstance].foursquare handleOpenURL:url];
+    int loginType = [[NSUserDefaults standardUserDefaults] integerForKey:@"loginType"];
+    if(loginType==0){
+        return [[FoursquareManager sharedInstance].foursquare handleOpenURL:url];
+    }
+    else {
+        return [FBSession.activeSession handleOpenURL:url];
+    }
 }
 -(void) showUserView {
     UserViewController *viewController = [[UserViewController alloc] initWithNibName:@"UserViewController" bundle:[NSBundle mainBundle]];

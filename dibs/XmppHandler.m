@@ -463,7 +463,7 @@ static XmppHandler* sharedInstance;
 		//displayName = [vCardTemp nickname];
         //UIImage *image = [user photo];
         //[user g]
-        BOOL performSelector = NO;
+        BOOL perform = NO;
 		if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive)
 		{
 			/*UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:displayName
@@ -473,18 +473,22 @@ static XmppHandler* sharedInstance;
                                                       otherButtonTitles:nil];
 			[alertView show];*/
             AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-            performSelector  = [app showChatView:body accessToken:from];
+            perform  = [app showChatView:body accessToken:from];
+            
+            
 		}
 		else
 		{
 			// We are not active, so use a local notification instead
 			UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-			localNotification.alertAction = @"Ok";
-			localNotification.alertBody = [NSString stringWithFormat:@"From: %@\n\n%@",displayName,body];
-            
+			localNotification.alertAction = @"Congratulations";
+			localNotification.alertBody = [NSString stringWithFormat:@"Someone like you too"];
+            NSArray *values = [[NSArray alloc] initWithObjects:from,body,nil];
+            NSArray *keys = [[NSArray alloc] initWithObjects:@"from",@"body",nil];
+            localNotification.userInfo = [NSDictionary dictionaryWithObjects:values forKeys:keys];
 			[[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
-		}
-        if (performSelector) {
+        }
+        if (perform) {
             [delegate performSelector:selector withObject:body];
         }
 

@@ -51,7 +51,7 @@
     [[self navigationItem] setLeftBarButtonItem:barButton];
     
     UIBarButtonItem *reloadButton = [[UIBarButtonItem alloc] initWithTitle:@"reload" style:UIBarButtonSystemItemAction target:self action:@selector(getUserData)];
-    [[self navigationItem] setRightBarButtonItem:reloadButton];
+    [[self navigationItem] setRightBarButtonItem:reloadButton];x
     
     [FoursquareManager sharedInstance].delegate = self;
     [FoursquareManager sharedInstance].selector = @selector(onUserDataReceived:);
@@ -93,6 +93,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void) onUserDataReceived_foursquare:(NSObject*) data {
+    
+}
 - (void) onUserDataReceived:(NSObject*) data {
     [lblLoading setHidden:YES];
     NSDictionary* responseData = [FoursquareManager sharedInstance].response;
