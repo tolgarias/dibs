@@ -48,9 +48,9 @@ static FacebookManager* sharedInstance;
 }
 
 -(void) openSession {
-    //NSArray *permissions = [NSArray arrayWithObjects:@"user_photos",
-      //                      nil];
-    [FBSession openActiveSessionWithReadPermissions:nil allowLoginUI:YES completionHandler:^(FBSession* session,FBSessionState state,NSError *error){
+    NSArray *permissions = [NSArray arrayWithObjects:@"user_photos,user_checkins,user_location,user_status",
+                            nil];
+    [FBSession openActiveSessionWithReadPermissions:permissions allowLoginUI:YES completionHandler:^(FBSession* session,FBSessionState state,NSError *error){
         [self sessionStateChanged:session state:state error:error];
     }];
 }

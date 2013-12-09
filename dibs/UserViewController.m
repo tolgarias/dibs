@@ -12,6 +12,7 @@
 #import "ScreenManager.h"
 #import "Utils.h"
 #import "XmppHandler.h"
+#import "FacebookManager.h"
 
 @interface UserViewController (){
     
@@ -51,11 +52,16 @@
     [[self navigationItem] setLeftBarButtonItem:barButton];
     
     UIBarButtonItem *reloadButton = [[UIBarButtonItem alloc] initWithTitle:@"reload" style:UIBarButtonSystemItemAction target:self action:@selector(getUserData)];
-    [[self navigationItem] setRightBarButtonItem:reloadButton];x
-    
-    [FoursquareManager sharedInstance].delegate = self;
-    [FoursquareManager sharedInstance].selector = @selector(onUserDataReceived:);
-    [self getUserData];
+    [[self navigationItem] setRightBarButtonItem:reloadButton];
+    int loginType = [[NSUserDefaults standardUserDefaults] integerForKey:@"loginType"];
+    if(loginType==1){
+        [self getUserData_facebook];
+    }
+    else {
+        [FoursquareManager sharedInstance].delegate = self;
+        [FoursquareManager sharedInstance].selector = @selector(onUserDataReceived_foursquare:);
+        [self getUserData];
+    }
     
     
     
@@ -82,6 +88,39 @@
  [indicator startAnimating];
  [lblLoading setHidden:NO];
 }
+
+-(void) getUserData_facebook{
+    NSString *query =
+    @"{"
+    @"'user':'SELECT uid, name, pic_square,username FROM user WHERE uid = me()',"
+    @"'checkins':'SELECT page_id,timestamp FROM location_post WHERE author_uid=me()',"
+    @"'page':'select  name,location,page_id from page where page_id in (select page_id from #checkins)'"
+    @"}";
+    // Set up the query parameter
+    //@"select target_id,timestamp from checkin where author_id=me()";
+    NSDictionary *queryParam =
+    [NSDictionary dictionaryWithObjectsAndKeys:query, @"q", nil];
+    // Make the API request that uses FQL
+    [FBRequestConnection startWithGraphPath:@"/fql"
+                                 parameters:queryParam
+                                 HTTPMethod:@"GET"
+                          completionHandler:^(FBRequestConnection *connection,
+                                              id result,
+                                              NSError *error) {
+                              if (error) {
+                                  NSLog(@"Error: %@", [error localizedDescription]);
+                              } else {
+                                  NSLog(@"%@",[result data]);
+                                  NSArray* checkins = (NSArray*)[result data];
+                                  [self onUserDataReceived_facebook:checkins];
+                                  
+                              }
+                          }];
+    [indicator setHidden:NO];
+    [indicator startAnimating];
+    [lblLoading setHidden:NO];
+    
+}
 -(void) logoutButtonPressed {
     [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"accessToken"];
     [[ScreenManager sharedInstance] showLoginView];
@@ -92,15 +131,51 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-- (void) onUserDataReceived_foursquare:(NSObject*) data {
+- (void) onUserDataReceived_facebook:(NSArray*) data {
+    NSDictionary* checkinsArray = data[0];
+    NSDictionary* userInfoArray = data[1];
+    NSDictionary* placeInfoArray = data[2];
+    
+    NSArray* chckins = [checkinsArray objectForKey:@"fql_result_set"];
+    NSArray* user = [userInfoArray objectForKey:@"fql_result_set"];
+    NSArray* places = [placeInfoArray objectForKey:@"fql_result_set"];
+    
+    NSDictionary *checkinInfo = chckins[0];
+    NSDictionary *userInfo = user[0];
+    NSDictionary *placeInfo = places[0];
+    
+    NSDictionary *locationInfo = [placeInfo objectForKey:@"location"];
+    
+    NSString *photo = [userInfo objectForKey:@"pic_square"];
+    NSString *firstName = [userInfo objectForKey:@"name"];
+    NSString *lastName = @"";
+    
+    
+    NSMutableDictionary* venueLocation = [[NSMutableDictionary alloc] init];
+   [venueLocation setObject:[locationInfo objectForKey:@"latitude"] forKey:@"lat"];
+   [venueLocation setObject:[locationInfo objectForKey:@"longitude"] forKey:@"lng"];
+    
+    NSString *venueName = [placeInfo objectForKey:@"name"];
+    NSString *venueId = [checkinInfo objectForKey:@"page_id"];
+    NSNumber *createdAt =[checkinInfo objectForKey:@"timestamp"];
+    
+    NSMutableDictionary *datas = [[NSMutableDictionary alloc] init];
+    [datas setObject:photo forKey:@"photo"];
+    [datas setObject:firstName forKey:@"firstName"];
+    [datas setObject:lastName forKey:@"lastName"];
+    [datas setObject:venueLocation forKey:@"venueLocation"];
+    [datas setObject:venueId forKey:@"venueId"];
+    [datas setObject:createdAt forKey:@"createdAt"];
+    [datas setObject:venueName forKey:@"venueName"];
+    
+    [self onUserDataReceived:datas];
+    
     
 }
-- (void) onUserDataReceived:(NSObject*) data {
-    [lblLoading setHidden:YES];
+
+- (void) onUserDataReceived_foursquare:(NSObject*) data {
     NSDictionary* responseData = [FoursquareManager sharedInstance].response;
     
-    NSLog(@"%@",responseData);
     NSString *photo = [[responseData objectForKey:@"user"] objectForKey:@"photo"];
     NSString *firstName = [[responseData objectForKey:@"user"] objectForKey:@"firstName"];
     NSString *lastName = [[responseData objectForKey:@"user"] objectForKey:@"lastName"];
@@ -112,10 +187,36 @@
     NSString *venueId = [venue objectForKey:@"id"];
     NSNumber *createdAt =[[[checkIns objectForKey:@"items"] objectAtIndex:0] objectForKey:@"createdAt"];
     
+    NSMutableDictionary *datas = [[NSMutableDictionary alloc] init];
+    [datas setObject:photo forKey:@"photo"];
+    [datas setObject:firstName forKey:@"firstName"];
+    [datas setObject:lastName forKey:@"lastName"];
+    [datas setObject:venueLocation forKey:@"venueLocation"];
+    [datas setObject:venueId forKey:@"venueId"];
+    [datas setObject:createdAt forKey:@"createdAt"];
+    [datas setObject:venueName forKey:@"venueName"];
+    
+    [self onUserDataReceived:datas];
+    
+
+}
+- (void) onUserDataReceived:(NSObject*) data {
+    [lblLoading setHidden:YES];
+    
+    NSString *photo = [data objectForKey:@"photo"];
+    NSString *firstName = [data objectForKey:@"firstName"];
+    NSString *lastName = [data objectForKey:@"lastName"];
+    
+    NSDictionary* venueLocation = [data objectForKey:@"venueLocation"];
+    NSString *venueName = [data objectForKey:@"venueName"];
+    NSString *venueId = [data objectForKey:@"venueId"];
+    NSNumber *createdAt =[data objectForKey:@"createdAt"];
+    
     
     NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
     NSString *name = [NSString stringWithFormat:@"%@ %@",firstName,lastName];
     NSString *bar = [[Utils sharedInstance] getIntervalString:createdAt];
+    
     [UserData sharedInstance].lastCheckInDate = bar;//[NSString stringWithFormat:@"%i",[createdAt intValue]];
     
     
