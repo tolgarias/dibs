@@ -53,16 +53,7 @@
     
     UIBarButtonItem *reloadButton = [[UIBarButtonItem alloc] initWithTitle:@"reload" style:UIBarButtonSystemItemAction target:self action:@selector(getUserData)];
     [[self navigationItem] setRightBarButtonItem:reloadButton];
-    int loginType = [[NSUserDefaults standardUserDefaults] integerForKey:@"loginType"];
-    if(loginType==1){
-        [self getUserData_facebook];
-    }
-    else {
-        [FoursquareManager sharedInstance].delegate = self;
-        [FoursquareManager sharedInstance].selector = @selector(onUserDataReceived_foursquare:);
-        [self getUserData];
-    }
-    
+    [self getUserData];
     
     
     UIGraphicsBeginImageContext(self.view.frame.size);
@@ -80,19 +71,44 @@
     lblDate.layer.masksToBounds = YES;
     
     
+    if([[UserData sharedInstance].remainingLikeCount intValue]==0 && isTimerStarted == NO){
+        isTimerStarted = YES;
+        double likeTime = [[[NSUserDefaults standardUserDefaults] objectForKey:@"likeTime"] doubleValue]-[[NSDate date] timeIntervalSince1970];
+        [UserData sharedInstance].nextLike = [NSNumber numberWithDouble:likeTime];
+        
+        [NSTimer scheduledTimerWithTimeInterval:1
+                                         target:self
+                                       selector:@selector(showNextLike)
+                                       userInfo:nil
+                                        repeats:0];
+        
+    }
+
+    
     
 }
--(void) getUserData {
+-(void) getUserData_foursquare {
  [[FoursquareManager sharedInstance] getUserData];
  [indicator setHidden:NO];
  [indicator startAnimating];
  [lblLoading setHidden:NO];
 }
+-(void) getUserData {
+    int loginType = [[NSUserDefaults standardUserDefaults] integerForKey:@"loginType"];
+    if(loginType==1){
+        [self getUserData_facebook];
+    }
+    else {
+        [FoursquareManager sharedInstance].delegate = self;
+        [FoursquareManager sharedInstance].selector = @selector(onUserDataReceived_foursquare:);
+        [self getUserData_foursquare];
+    }
 
+}
 -(void) getUserData_facebook{
     NSString *query =
     @"{"
-    @"'user':'SELECT uid, name, pic_square,username FROM user WHERE uid = me()',"
+    @"'user':'SELECT uid, name, pic_square,username,uid FROM user WHERE uid = me()',"
     @"'checkins':'SELECT page_id,timestamp FROM location_post WHERE author_uid=me()',"
     @"'page':'select  name,location,page_id from page where page_id in (select page_id from #checkins)'"
     @"}";
@@ -124,6 +140,7 @@
 -(void) logoutButtonPressed {
     [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"accessToken"];
     [[ScreenManager sharedInstance] showLoginView];
+    isTimerStarted = NO;
     
 }
 - (void)didReceiveMemoryWarning
@@ -149,14 +166,21 @@
     NSString *photo = [userInfo objectForKey:@"pic_square"];
     NSString *firstName = [userInfo objectForKey:@"name"];
     NSString *lastName = @"";
+    NSInteger *uid = (NSInteger*)[userInfo objectForKey:@"uid"];
+    NSString *uidStr = [NSString stringWithFormat:@"%i",uid];
     
-    
+    [[NSUserDefaults standardUserDefaults] setObject:uidStr forKey:@"accessToken"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
     NSMutableDictionary* venueLocation = [[NSMutableDictionary alloc] init];
    [venueLocation setObject:[locationInfo objectForKey:@"latitude"] forKey:@"lat"];
    [venueLocation setObject:[locationInfo objectForKey:@"longitude"] forKey:@"lng"];
     
     NSString *venueName = [placeInfo objectForKey:@"name"];
-    NSString *venueId = [checkinInfo objectForKey:@"page_id"];
+    NSNumber *ven = (NSNumber*)[checkinInfo objectForKey:@"page_id"];
+    NSString *venueId = [NSString stringWithFormat:@"%@",ven];
+    
+   // NSString *venueId = [checkinInfo objectForKey:@"page_id"];
     NSNumber *createdAt =[checkinInfo objectForKey:@"timestamp"];
     
     NSMutableDictionary *datas = [[NSMutableDictionary alloc] init];
@@ -255,7 +279,7 @@
     
 
     
-    if([[UserData sharedInstance].remainingLikeCount intValue]==0){
+    /*if([[UserData sharedInstance].remainingLikeCount intValue]==0){
         
         double likeTime = [[[NSUserDefaults standardUserDefaults] objectForKey:@"likeTime"] doubleValue]-[[NSDate date] timeIntervalSince1970];
         [UserData sharedInstance].nextLike = [NSNumber numberWithDouble:likeTime];
@@ -265,7 +289,7 @@
                                        selector:@selector(showNextLike)
                                         userInfo:nil
                                         repeats:0];
-    }
+    }*/
     
 }
 -(void) showUserInfo {
@@ -275,19 +299,7 @@
     NSString *userListfInfo = [NSString stringWithFormat:@"To see users who also checked in %@ please tap show user list button",[UserData sharedInstance].lastCheckInVenueName];
     [lblVenue setText:about];
     [lblDate setText:userListfInfo];
-    
-    if([[UserData sharedInstance].remainingLikeCount intValue]==0){
-        
-        double likeTime = [[[NSUserDefaults standardUserDefaults] objectForKey:@"likeTime"] doubleValue]-[[NSDate date] timeIntervalSince1970];
-        [UserData sharedInstance].nextLike = [NSNumber numberWithDouble:likeTime];
-        
-            [NSTimer scheduledTimerWithTimeInterval:1
-                                       target:self
-                                       selector:@selector(showNextLike)
-                                       userInfo:nil
-                                        repeats:0];
-    }
-    
+
 
 }
 - (void)viewWillAppear:(BOOL)animated {
@@ -295,6 +307,20 @@
     if([[UserData sharedInstance].userInfoChanged intValue]==1){
         [self showUserInfo];
         [UserData sharedInstance].userInfoChanged = [NSNumber numberWithInt:0];
+        
+        if([[UserData sharedInstance].remainingLikeCount intValue]==0 && isTimerStarted == NO){
+            isTimerStarted = YES;
+            double likeTime = [[[NSUserDefaults standardUserDefaults] objectForKey:@"likeTime"] doubleValue]-[[NSDate date] timeIntervalSince1970];
+            [UserData sharedInstance].nextLike = [NSNumber numberWithDouble:likeTime];
+            
+            [NSTimer scheduledTimerWithTimeInterval:1
+                                             target:self
+                                           selector:@selector(showNextLike)
+                                           userInfo:nil
+                                            repeats:0];
+            
+        }
+
     }
 
 }
@@ -307,18 +333,22 @@
 -(void) showNextLike {
     [UserData sharedInstance].nextLike = [NSNumber numberWithDouble:[[UserData sharedInstance].nextLike doubleValue]-1];
     if([[UserData sharedInstance].nextLike intValue]<=0){
+        [UserData sharedInstance].nextLike = 0;
         [UserData sharedInstance].remainingLikeCount= [NSNumber numberWithInt:1];
         [lblLikeBg setHidden:YES];
         [lblLike setHidden:YES];
+        isTimerStarted = NO;
         [self showUserInfo];
     }
     else {
-        [self setNextLikeLabels];
-        [NSTimer scheduledTimerWithTimeInterval:1
+        if(isTimerStarted==YES){
+            [self setNextLikeLabels];
+            [NSTimer scheduledTimerWithTimeInterval:1
                                      target:self
                                    selector:@selector(showNextLike)
                                    userInfo:nil
                                     repeats:0];
+        }
     }
 }
 

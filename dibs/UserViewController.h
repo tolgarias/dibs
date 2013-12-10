@@ -10,7 +10,9 @@
 #import "FoursquareManager.h"
 
 
-@interface UserViewController : UIViewController
+@interface UserViewController : UIViewController {
+    BOOL isTimerStarted;
+}
 
 @property (nonatomic,strong) IBOutlet UIImageView *profileImg;
 
@@ -31,4 +33,5 @@
 -(IBAction)ShowUserList:(id)sender;
 
 -(void) getUserData_facebook;
+-(void) getUserData_foursquare;
 @end

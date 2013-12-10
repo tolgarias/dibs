@@ -36,7 +36,14 @@
     NSString* accessToken =  [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
     //NSLog(@"accesToken:%@",accessToken);
     if(accessToken!=nil && ![accessToken isEqualToString:@""]){
-        [[FoursquareManager sharedInstance] foursquare].accessToken = accessToken;
+        int loginType = [[NSUserDefaults standardUserDefaults] integerForKey:@"loginType"];
+        if(loginType==0){
+            [[FoursquareManager sharedInstance] foursquare].accessToken = accessToken;
+        }
+        else {
+            [[FacebookManager sharedInstance] openSession];
+        }
+        
         UserViewController *viewController = [[UserViewController alloc] initWithNibName:@"UserViewController" bundle:[NSBundle mainBundle]];
         navController_ = [[UINavigationController alloc] initWithRootViewController:viewController];
         [viewController release];
